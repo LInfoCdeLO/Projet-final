@@ -412,4 +412,12 @@ public class Vehicule {
     public double getY() {
         return (740 - R1[0][1] + 740 - R2[0][1]) / 2;
     }
+    
+    /**
+     *
+     * @return
+     */
+    public ArrayList<Distance> getPoutres() {
+        return this.poutres;
+    }
 }
