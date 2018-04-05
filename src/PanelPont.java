@@ -150,7 +150,7 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
         if (DetecterPoutre) {
             g2.setColor(Color.red);
             Stroke s = g2.getStroke();
-            g2.setStroke(new BasicStroke(16));
+            g2.setStroke(new BasicStroke(16, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
             g2.drawLine((int) this.distanceDetectee.getP1().getX() + this.correcteurX, (int) distanceDetectee.getP1().getY() + this.correcteurY, (int) distanceDetectee.getP2().getX() + this.correcteurX, (int) distanceDetectee.getP2().getY() + this.correcteurY);
             g2.setStroke(s);
         } else {
@@ -160,8 +160,6 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
             g2.drawLine((int) this.distanceDetectee.getP1().getX() + this.correcteurX, (int) distanceDetectee.getP1().getY() + this.correcteurY, (int) distanceDetectee.getP2().getX() + this.correcteurX, (int) distanceDetectee.getP2().getY() + this.correcteurY);
             g2.setStroke(s);
             g.setColor(Color.RED);
-            /*g.fillOval((int)this.distanceDetectee.getP1().getX(), (int)this.distanceDetectee.getP1().getY(), 10,10);
-            g.fillOval((int)this.distanceDetectee.getP2().getX(), (int)this.distanceDetectee.getP2().getY(), 10,10);*/
         }
 
     }
@@ -418,10 +416,12 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
                 Point point2 = new Point(0, 0);
                 this.detectionPoint(this.pReleased, 20);
                 point2 = new Point((int) this.pReleased.getX(), (int) this.pReleased.getY());
-                Distance D = new Distance(point1, point2, this.numeroMateriaux);
-                this.listeBarre.add(D);
+                if (point1.getX() != point2.getX()) {
+                    Distance D = new Distance(point1, point2, this.numeroMateriaux);
+                    this.listeBarre.add(D);
+                }
             }
-            this.distanceDetectee = new Distance();
+            this.distanceDetectee = new Distance(new Point(-50, -50), new Point(-50, -50), 1);
             this.appuyer = false;
             repaint();
         }
