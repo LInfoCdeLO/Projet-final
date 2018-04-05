@@ -228,11 +228,6 @@ public class Torseur implements Comparable<Torseur> {
 
 
         }
-
-		
-		
-	
-	 
-	 
+}
 	 
 	

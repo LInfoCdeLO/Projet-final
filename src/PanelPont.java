@@ -156,7 +156,7 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
         } else {
             g2.setColor(Color.black);
             Stroke s = g2.getStroke();
-            g2.setStroke(new BasicStroke(16));
+            g2.setStroke(new BasicStroke(16, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
             g2.drawLine((int) this.distanceDetectee.getP1().getX() + this.correcteurX, (int) distanceDetectee.getP1().getY() + this.correcteurY, (int) distanceDetectee.getP2().getX() + this.correcteurX, (int) distanceDetectee.getP2().getY() + this.correcteurY);
             g2.setStroke(s);
             g.setColor(Color.RED);
@@ -191,8 +191,8 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
                     for (int i = (int) dis.getP1().getX(); i <= (int) dis.getP2().getX(); i++) {
                         int x = i;
                         int y = (int) (a * i + b);
-                        if (PP.getX() <= x + 10 && PP.getX() >= x - 10) {
-                            if (PP.getY() <= y + 10 && PP.getY() >= y - 10) {
+                        if (PP.getX() <= x + 15 && PP.getX() >= x - 15) {
+                            if (PP.getY() <= y + 15 && PP.getY() >= y - 15) {
                                 this.DetecterPoutre = true;
                                 n++;
                                 System.out.println("Distance Suprimee " + n + " : " + dis.getP1().getX() + " " + dis.getP1().getY() + " " + dis.getP2().getX() + " " + dis.getP2().getY());
@@ -208,13 +208,15 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
                     for (int i = (int) dis.getP2().getX(); i <= (int) dis.getP1().getX(); i++) {
                         int x = i;
                         int y = (int) (a * i + b);
-                        if (PP.getX() <= x + 10 && PP.getX() >= x - 10) {
-                            if (PP.getY() <= y + 10 && PP.getY() >= y - 10) {
+                        if (PP.getX() <= x + 15 && PP.getX() >= x - 15) {
+                            if (PP.getY() <= y + 15 && PP.getY() >= y - 15) {
                                 this.DetecterPoutre = true;
                                 n++;
                                 System.out.println("Distance Suprimee " + n + " : " + dis.getP1().getX() + " " + dis.getP1().getY() + " " + dis.getP2().getX() + " " + dis.getP2().getY());
                                 this.distanceDetectee = dis;
-                                this.listeBarre.remove(dis);
+                                if (PP.equals(pReleased)) {
+                                    this.listeBarre.remove(dis);
+                                }
                             }
                         }
                     }
@@ -355,7 +357,7 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
         if (V) {
             g2.setColor(dis.getMatiere().getColor());
             Stroke s = g2.getStroke();
-            g2.setStroke(new BasicStroke(16));
+            g2.setStroke(new BasicStroke(16, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
             g2.drawLine((int) dis.getP1().getX() + this.correcteurX, (int) dis.getP1().getY() + this.correcteurY, (int) dis.getP2().getX() + this.correcteurX, (int) dis.getP2().getY() + this.correcteurY);
             g.setColor(Color.red);
             g2.setStroke(s);
@@ -419,6 +421,7 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
                 Distance D = new Distance(point1, point2, this.numeroMateriaux);
                 this.listeBarre.add(D);
             }
+            this.distanceDetectee = new Distance();
             this.appuyer = false;
             repaint();
         }
