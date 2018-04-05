@@ -1,3 +1,4 @@
+import java.util.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,6 +34,8 @@ public class ConstructionPont {
         this.pont = new ArrayList<Distance>();
         boolean fin = false;
         boolean trouve = false;
+        int iter=0;
+        int tailleTemp = this.listePoutre.size();
         int n = 0;
 
         if (taille == 0) {
@@ -104,6 +107,19 @@ public class ConstructionPont {
                 this.creationListe = true;
                 fin = true;
             }
+            
+            if(taille==tailleTemp){
+				iter++;
+			}
+			else{
+				iter=0;
+				tailleTemp=this.listePoutre.size();
+			}
+			
+			if(iter>100){
+				fin=true;
+			}
+            
         }
     }
 
