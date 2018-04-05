@@ -107,7 +107,7 @@ public class FenetreInterface extends JFrame implements ActionListener, ChangeLi
 
         calibrer = new JButton("CALIBRER");
         calibrer.setFont(policeCreerEffacer);
-        calibrer.setBounds(210, 800, 250, 70);
+        calibrer.setBounds(210, 580, 250, 70);
         calibrer.setBackground(Color.black);
         calibrer.setForeground(Color.white);
 
