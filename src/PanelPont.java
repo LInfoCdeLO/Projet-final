@@ -51,7 +51,6 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
     private boolean calibration;
 
 
-
     public PanelPont(int numeroMateriaux) {
         super();
         monVehicule = new Vehicule(1, 80, 20, 40, 50);
@@ -77,14 +76,12 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
         this.correcteurY = 0;
         this.build = false;
         this.start = false;
-        this.pDetected = new Point(500,300);
+        this.pDetected = new Point(500, 300);
         calibration = false;
-        pCalibration = new Point((int) ((p1.getX() + p2.getX())/2),(int) ((p1.getY() + p2.getY())/2));
+        pCalibration = new Point((int) ((p1.getX() + p2.getX()) / 2), (int) ((p1.getY() + p2.getY()) / 2));
         this.setVisible(true);
         repaint();
     }
-
-
 
 
     public void paint(Graphics g) {
@@ -100,7 +97,9 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
         g.setColor(Color.RED);
         g.fillOval((int) p1.getX() + this.correcteurX - 8, (int) p1.getY() + this.correcteurY - 8, 16, 16);
         g.fillOval((int) p2.getX() + this.correcteurX - 8, (int) p2.getY() + this.correcteurY - 8, 16, 16);
-        if(calibration) {g.fillOval((int) pCalibration.getX() - 8, (int) pCalibration.getY() - 8, 16, 16);}
+        if (calibration) {
+            g.fillOval((int) pCalibration.getX() - 8, (int) pCalibration.getY() - 8, 16, 16);
+        }
 
         if (cliquable) {
             paintBarre(g, false, this.dMove, g2);
@@ -111,33 +110,33 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
             //System.out.println("Coordonnees: x:" + dis.getP1().getX());
         }
         //Vehicule
-        double l=monVehicule.getLargeur();
-        double h=monVehicule.getHauteur();
+        double l = monVehicule.getLargeur();
+        double h = monVehicule.getHauteur();
 
-        double x1=monVehicule.getX1();
-        double y1=740-monVehicule.getY1();
-        double x2=monVehicule.getX2();
-        double y2=740-monVehicule.getY2();
+        double x1 = monVehicule.getX1();
+        double y1 = 740 - monVehicule.getY1();
+        double x2 = monVehicule.getX2();
+        double y2 = 740 - monVehicule.getY2();
 
-        double alpha=Math.atan((y1-y2)/(x1-x2));
+        double alpha = Math.atan((y1 - y2) / (x1 - x2));
 
-        double x3=x2-h*Math.sin(alpha);
-        double y3=y2+h*Math.cos(alpha);
-        double x4=x1-h*Math.sin(alpha);
-        double y4=y1+h*Math.cos(alpha);
+        double x3 = x2 - h * Math.sin(alpha);
+        double y3 = y2 + h * Math.cos(alpha);
+        double x4 = x1 - h * Math.sin(alpha);
+        double y4 = y1 + h * Math.cos(alpha);
 
-        int[] xPoints={(int)(x1),(int)(x2),(int)(x3),(int)(x4)};
-        int[] yPoints={(int)(740-y1),(int)(740-y2),(int)(740-y3),(int)(740-y4)};
-        int nbPoints=4;
+        int[] xPoints = {(int) (x1), (int) (x2), (int) (x3), (int) (x4)};
+        int[] yPoints = {(int) (740 - y1), (int) (740 - y2), (int) (740 - y3), (int) (740 - y4)};
+        int nbPoints = 4;
 
         g.setColor(Color.green);
-        g.fillPolygon(xPoints,yPoints,nbPoints);
+        g.fillPolygon(xPoints, yPoints, nbPoints);
 
         g.setColor(Color.black);
-        g.fillOval((int)(x1-10),(int)(740-y1-10),20,20);
-        g.fillOval((int)(x2-10),(int)(740-y2-10),20,20);
+        g.fillOval((int) (x1 - 10), (int) (740 - y1 - 10), 20, 20);
+        g.fillOval((int) (x2 - 10), (int) (740 - y2 - 10), 20, 20);
 
-		if (this.Detecter) {
+        if (this.Detecter) {
             g.setColor(Color.BLUE);
             int x = (int) this.pDetected.getX();
             int y = (int) this.pDetected.getY();
@@ -162,13 +161,13 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
             g2.setStroke(s);
             g.setColor(Color.RED);
             /*g.fillOval((int)this.distanceDetectee.getP1().getX(), (int)this.distanceDetectee.getP1().getY(), 10,10);
-			g.fillOval((int)this.distanceDetectee.getP2().getX(), (int)this.distanceDetectee.getP2().getY(), 10,10);*/
+            g.fillOval((int)this.distanceDetectee.getP2().getX(), (int)this.distanceDetectee.getP2().getY(), 10,10);*/
         }
 
     }
 
 
-    public void calibration(){
+    public void calibration() {
         if (!start) {
             System.out.println("calibration true");
             calibration = true;
@@ -377,12 +376,12 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
     public void mouseClicked(MouseEvent e) {
 
         if (!start) {
-            if (calibration){
-                correcteurX = e.getX() - (int) pCalibration.getX() ;
-                correcteurY = e.getY() - (int) pCalibration.getY() ;
+            if (calibration) {
+                correcteurX = e.getX() - (int) pCalibration.getX();
+                correcteurY = e.getY() - (int) pCalibration.getY();
                 calibration = false;
                 System.out.println("calib false");
-            }else {
+            } else {
                 this.pClicked = new Point(e.getX(), e.getY());
                 if (!this.build) {//je suis entrain d'effacer un poutre
                     this.detectionPoutre(this.pClicked);//regarde si le point sur lequel je viens de cliquer appartient a une poutre
@@ -425,9 +424,11 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
         }
     }
 
-    public void mouseEntered(MouseEvent e) {}
+    public void mouseEntered(MouseEvent e) {
+    }
 
-    public void mouseExited(MouseEvent e) {}
+    public void mouseExited(MouseEvent e) {
+    }
 
     public void mouseMoved(MouseEvent e) {
 
@@ -472,8 +473,8 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
         }
     }
 
-    public void setListeBarre(){
-        this.listeBarre=new LinkedList<Distance>();
+    public void setListeBarre() {
+        this.listeBarre = new LinkedList<Distance>();
     }
 
     public void setBuild(boolean build) {
