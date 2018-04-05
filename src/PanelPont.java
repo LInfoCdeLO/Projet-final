@@ -41,7 +41,6 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
     private boolean cliquable;    //est-ce que ce point de l'ecran est cliquable (y a-t-il un point sur lequel je peux construire une poutre)
     private boolean plusUn;
     private boolean DetecterPoutre;
-    private boolean O;
     private boolean start;
     private int n;                //compteur
     private int correcteurX;    //correcteur du a l'ecran selon X
