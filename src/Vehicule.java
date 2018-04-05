@@ -408,9 +408,9 @@ public class Vehicule {
      */
     public ArrayList<Distance> getPoutres() {
         ArrayList<Distance> p = new ArrayList<Distance>();
-        p = poutres;
-        p.remove(p.size() - 1);
-        p.remove(p.size() - 1);
+        for (int i = 0; i < poutres.size() - 2; i++) {
+            p.add(poutres.get(i));
+        }
         return p;
     }
 }
