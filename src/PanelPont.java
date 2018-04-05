@@ -73,6 +73,7 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
         //correcteur graphique correspondant au decalage entre l'ecran et le programme
         this.correcteurX = 0;
         this.correcteurY = 0;
+        this.pDetected=new Point(-50,-50);
         this.build = false;
         this.start = false;
         this.pDetected = new Point(500, 300);
