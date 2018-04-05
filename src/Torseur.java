@@ -1,5 +1,5 @@
 import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
 //convertir 20pixel = 1 m
 
 public class Torseur implements Comparable<Torseur> {
@@ -9,7 +9,13 @@ public class Torseur implements Comparable<Torseur> {
     private double x; // distance (partant de l'extremité d'un segment du pont) à laquelle on calcule le torseur
     private Vehicule V;  // vehicule traversant le pont
 
-
+    /**
+     *
+     * @param X
+     * @param Y
+     * @param M
+     * @param x
+     */
     public Torseur(double X, double Y, double M, double x) {
         this.X = X;
         this.Y = Y;
@@ -20,6 +26,16 @@ public class Torseur implements Comparable<Torseur> {
      *Le problème étant un problème plan les autres composantes sont nulles.On calcule ce torseur sur un segment du pont (poutre) en une position de ce segment (représentée par x).
      * Les valeurs du torseur dépendent de la présence ou non de la voiture (point V) sur le segment du pont, ainsi que de la position
      * sur ce segment pour laquelle on calcule le torseur (variable x). On différencie alors plusieurs cas
+     */
+
+    /**
+     *
+     * @param poutre
+     * @param X
+     * @param Y
+     * @param M
+     * @param x
+     * @param V
      */
     public Torseur(Distance poutre, double X, double Y, double M, double x, Vehicule V) {  // les variables X, Y et Z représentent les composantes du torseur de l'action s'exercant sur l'extremitée gauche du segment
         this.V = V;
@@ -79,6 +95,14 @@ public class Torseur implements Comparable<Torseur> {
 
     }
 
+    /**
+     *
+     * @param poutre
+     * @param X
+     * @param Y
+     * @param M
+     * @param V
+     */
     public Torseur(Distance poutre, double X, double Y, double M, Vehicule V) {
         this.V = V;
 
@@ -106,20 +130,40 @@ public class Torseur implements Comparable<Torseur> {
 
 
     /* méthode renvoyant la composante X de traction du torseur */
+
+    /**
+     *
+     * @return
+     */
     public double getX() {
         return this.X;
     }
 
     /* méthode renvoyant la composante Y de cisaillement du torseur */
+
+    /**
+     *
+     * @return
+     */
     public double getY() {
         return this.Y;
     }
 
     /* méthode renvoyant la composante M de flexion du torseur */
+
+    /**
+     *
+     * @return
+     */
     public double getM() {
         return this.M;
     }
 
+    /**
+     *
+     * @param torseur
+     * @return
+     */
     public int compareTo(Torseur torseur) {
         return 0;
     }
@@ -127,6 +171,12 @@ public class Torseur implements Comparable<Torseur> {
 
     /* méthode renvoyant une liste comportant les torseurs de chaque extremité gauche des segments du pont.
     Cette liste est ordonnée (Le ième torseur est le torseur de l'extremité gauche du ième segment en comptant de gauche à droite) */
+
+    /**
+     *
+     * @param pont
+     * @return
+     */
     public ArrayList<Torseur> getTorseursExtremites(ArrayList<Distance> pont) {
         Simulation simulation = new Simulation(pont, new Point(250, 432), new Point(1050, 432), V);
         ArrayList<Torseur> Resultat = new ArrayList<>();
@@ -144,6 +194,12 @@ public class Torseur implements Comparable<Torseur> {
 
     /* méthode renvoyant les coordonnées du point du pont sur lequel il y a une rupture si le pont se casse.
     Si le pont ne se casse pas, cette méthode renvoie un point de coordonnée (-1,-1) */
+
+    /**
+     *
+     * @param pont
+     * @return
+     */
     public Point Pointrupture(ArrayList<Distance> pont) {
         ArrayList<Torseur> TorseurExtremite = getTorseursExtremites(pont);
 

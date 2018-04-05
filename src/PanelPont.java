@@ -1,15 +1,9 @@
-import java.awt.Color;
-import java.awt.Graphics;
-import javax.swing.JPanel;
 import javax.swing.*;
-
-import javax.swing.ImageIcon;
-import java.awt.BasicStroke;
-import java.awt.Stroke;
-import java.awt.image.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.util.LinkedList;
 
 //    /!\ AUNCUNE des lignes de codes si dessous n'est inutile. Sans doute ne sont-elles pas toutes optimisees mais elles ne sont en aucun cas inutiles, si vous ne comprenez pas a quoi elles servent c'est que vous n'avez pas bien compris le programme
 //        Bon courage ^^
