@@ -19,6 +19,10 @@ public class Distance implements Comparable<Distance> {
         this.poids = 10 * 0.80 * this.matierePoutre.getDensite();
     }
 
+    public Distance() {
+
+    }
+
     public void setP1(Point p1) {
         this.p1 = p1;
     }
@@ -88,5 +92,5 @@ public class Distance implements Comparable<Distance> {
     }
 }
 
-	
+
 
