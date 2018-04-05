@@ -83,7 +83,7 @@ public class FenetreInterface extends JFrame implements ActionListener, ChangeLi
         recommencer.setBounds(10, 660, 450, 110);
         recommencer.setBackground(Color.red);
         recommencer.setForeground(Color.white);
-        
+
 
         creer = new JButton("CREER");
         Font policeCreerEffacer = new Font(" Comic Sans MS ", Font.BOLD, 30);
@@ -91,7 +91,7 @@ public class FenetreInterface extends JFrame implements ActionListener, ChangeLi
         creer.setBounds(1020, 20, 250, 70);
         creer.setBackground(Color.green);
         creer.setForeground(Color.black);
-        
+
 
         effacer = new JButton("EFFACER");
         effacer.setFont(policeCreerEffacer);
@@ -250,7 +250,6 @@ public class FenetreInterface extends JFrame implements ActionListener, ChangeLi
     }
 
     /**
-     *
      * @param e
      */
     public void actionPerformed(ActionEvent e) {
@@ -315,7 +314,6 @@ public class FenetreInterface extends JFrame implements ActionListener, ChangeLi
     }
 
     /**
-     *
      * @param e
      */
     public void stateChanged(ChangeEvent e) {
@@ -375,26 +373,24 @@ public class FenetreInterface extends JFrame implements ActionListener, ChangeLi
             restart(0);
         }
         //test resistance
-		
-		Torseur T=new Torseur(conteneur1.getVehicule());
-		
-		Point P=T.Pointrupture(conteneur1.getVehicule().getPoutres());
-		
-		if((P.getX()!=-1)&&(P.getY()!=-1)){
-			JOptionPane.showMessageDialog(this, "Dommage, le pont à cédé!!");
-			restart(0);
-		}
-		else if((P.getX()==-1)&&(P.getY()==-1)){
-			System.out.println("le pont resiste");
-		}
-		
-		
+
+        Torseur T = new Torseur(conteneur1.getVehicule());
+
+        Point P = T.Pointrupture(conteneur1.getVehicule().getPoutres());
+
+        if ((P.getX() != -1) && (P.getY() != -1)) {
+            JOptionPane.showMessageDialog(this, "Dommage, le pont à cédé!!");
+            restart(0);
+        } else if ((P.getX() == -1) && (P.getY() == -1)) {
+            System.out.println("le pont resiste");
+        }
+
+
         repaint();
 
     }
 
     /**
-     *
      * @param a
      */
     public void restart(int a) {

@@ -10,7 +10,6 @@ public class Matiere {
     private Color c;
 
     /**
-     *
      * @param nindentification
      */
     public Matiere(int nindentification) {
@@ -34,7 +33,6 @@ public class Matiere {
     }
 
     /**
-     *
      * @return
      */
     public double getDensite() {
@@ -42,7 +40,6 @@ public class Matiere {
     }
 
     /**
-     *
      * @return
      */
     public Color getColor() {

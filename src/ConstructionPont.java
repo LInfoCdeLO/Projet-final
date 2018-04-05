@@ -13,7 +13,6 @@ public class ConstructionPont {
     private boolean creationListe;
 
     /**
-     *
      * @param listePoutre
      */
     public ConstructionPont(LinkedList<Distance> listePoutre) {
@@ -132,7 +131,6 @@ public class ConstructionPont {
     }
 
     /**
-     *
      * @return
      */
     public boolean getCreationListe() {
@@ -140,7 +138,6 @@ public class ConstructionPont {
     }
 
     /**
-     *
      * @return
      */
     public ArrayList<Distance> getPont() {

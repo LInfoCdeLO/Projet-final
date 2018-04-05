@@ -28,7 +28,6 @@ public class Vehicule {
     private ArrayList<Distance> poutres;
 
     /**
-     *
      * @param a
      * @param b
      * @param c
@@ -76,7 +75,6 @@ public class Vehicule {
     }
 
     /**
-     *
      * @return
      */
     public boolean moteur() {
@@ -261,7 +259,6 @@ public class Vehicule {
     }
 
     /**
-     *
      * @param d
      * @return
      */
@@ -276,7 +273,6 @@ public class Vehicule {
     }
 
     /**
-     *
      * @param a
      */
     public void setPoutres(ArrayList<Distance> a) {
@@ -286,7 +282,6 @@ public class Vehicule {
     }
 
     /**
-     *
      * @param a
      */
     public void setType(int a) {
@@ -294,7 +289,6 @@ public class Vehicule {
     }
 
     /**
-     *
      * @return
      */
     public int getType() {
@@ -302,7 +296,6 @@ public class Vehicule {
     }
 
     /**
-     *
      * @param a
      */
     public void setPoids(double a) {
@@ -310,7 +303,6 @@ public class Vehicule {
     }
 
     /**
-     *
      * @return
      */
     public double getPoids() {
@@ -318,7 +310,6 @@ public class Vehicule {
     }
 
     /**
-     *
      * @param a
      */
     public void setLargeur(double a) {
@@ -326,7 +317,6 @@ public class Vehicule {
     }
 
     /**
-     *
      * @return
      */
     public double getLargeur() {
@@ -334,7 +324,6 @@ public class Vehicule {
     }
 
     /**
-     *
      * @param a
      */
     public void setHauteur(double a) {
@@ -342,7 +331,6 @@ public class Vehicule {
     }
 
     /**
-     *
      * @return
      */
     public double getHauteur() {
@@ -350,7 +338,6 @@ public class Vehicule {
     }
 
     /**
-     *
      * @param a
      */
     public void setVitesse(double a) {
@@ -358,7 +345,6 @@ public class Vehicule {
     }
 
     /**
-     *
      * @return
      */
     public double getVitesse() {
@@ -366,7 +352,6 @@ public class Vehicule {
     }
 
     /**
-     *
      * @return
      */
     public double getX1() {
@@ -374,7 +359,6 @@ public class Vehicule {
     }
 
     /**
-     *
      * @return
      */
     public double getX2() {
@@ -382,7 +366,6 @@ public class Vehicule {
     }
 
     /**
-     *
      * @return
      */
     public double getY1() {
@@ -390,7 +373,6 @@ public class Vehicule {
     }
 
     /**
-     *
      * @return
      */
     public double getY2() {
@@ -398,7 +380,6 @@ public class Vehicule {
     }
 
     /**
-     *
      * @return
      */
     public double getX() {
@@ -406,15 +387,13 @@ public class Vehicule {
     }
 
     /**
-     *
      * @return
      */
     public double getY() {
         return (740 - R1[0][1] + 740 - R2[0][1]) / 2;
     }
-    
+
     /**
-     *
      * @return
      */
     public ArrayList<Distance> getPoutres() {

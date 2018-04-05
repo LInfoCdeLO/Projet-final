@@ -10,7 +10,6 @@ public class Torseur implements Comparable<Torseur> {
     private Vehicule V;  // vehicule traversant le pont
 
     /**
-     *
      * @param X
      * @param Y
      * @param M
@@ -21,9 +20,8 @@ public class Torseur implements Comparable<Torseur> {
         this.Y = Y;
         this.M = M;
     }
-    
+
     /**
-     *
      * @param V
      */
     public Torseur(Vehicule V) {
@@ -37,7 +35,6 @@ public class Torseur implements Comparable<Torseur> {
      */
 
     /**
-     *
      * @param poutre
      * @param X
      * @param Y
@@ -104,7 +101,6 @@ public class Torseur implements Comparable<Torseur> {
     }
 
     /**
-     *
      * @param poutre
      * @param X
      * @param Y
@@ -140,7 +136,6 @@ public class Torseur implements Comparable<Torseur> {
     /* méthode renvoyant la composante X de traction du torseur */
 
     /**
-     *
      * @return
      */
     public double getX() {
@@ -150,7 +145,6 @@ public class Torseur implements Comparable<Torseur> {
     /* méthode renvoyant la composante Y de cisaillement du torseur */
 
     /**
-     *
      * @return
      */
     public double getY() {
@@ -160,7 +154,6 @@ public class Torseur implements Comparable<Torseur> {
     /* méthode renvoyant la composante M de flexion du torseur */
 
     /**
-     *
      * @return
      */
     public double getM() {
@@ -168,7 +161,6 @@ public class Torseur implements Comparable<Torseur> {
     }
 
     /**
-     *
      * @param torseur
      * @return
      */
@@ -181,7 +173,6 @@ public class Torseur implements Comparable<Torseur> {
     Cette liste est ordonnée (Le ième torseur est le torseur de l'extremité gauche du ième segment en comptant de gauche à droite) */
 
     /**
-     *
      * @param pont
      * @return
      */
@@ -191,7 +182,7 @@ public class Torseur implements Comparable<Torseur> {
         Torseur TorseurExtremiteAvant = new Torseur(pont.get(0), simulation.getPivotA() * Math.sin(pont.get(0).getAngle()), simulation.getPivotA() * Math.cos(pont.get(0).getAngle()), 0, this.V);
         Resultat.add(TorseurExtremiteAvant);  //on ajoute le Torseur de la 1er extremitée (point de départ du pont) dans la liste Resultat,
 
-        for (int i = 0; i < pont.size()-1; i++) { // on parcourt les segments du pont
+        for (int i = 0; i < pont.size() - 1; i++) { // on parcourt les segments du pont
             double phi = pont.get(i + 1).getAngle() - pont.get(i).getAngle(); // phi représente l'angle entre deux segments consécutifs
             Torseur Torseurextremite = new Torseur(pont.get(i), TorseurExtremiteAvant.X * Math.cos(phi) + TorseurExtremiteAvant.Y * Math.sin(phi), -TorseurExtremiteAvant.X * Math.sin(phi) + TorseurExtremiteAvant.Y * Math.cos(phi), TorseurExtremiteAvant.M, this.V);
             TorseurExtremiteAvant = Torseurextremite;
@@ -204,7 +195,6 @@ public class Torseur implements Comparable<Torseur> {
     Si le pont ne se casse pas, cette méthode renvoie un point de coordonnée (-1,-1) */
 
     /**
-     *
      * @param pont
      * @return
      */
@@ -228,7 +218,7 @@ public class Torseur implements Comparable<Torseur> {
         double EcartZ;
         double coordonneex;
         double coordonneey;
-        double sec=5*16.0/20.0;
+        double sec = 5 * 16.0 / 20.0;
 
         for (int i = 0; i < pont.size(); i++) {
             for (double j = 0; j <= pont.get(i).getLongueur(); j++) {

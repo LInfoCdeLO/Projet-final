@@ -47,7 +47,6 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
     private boolean calibration;
 
     /**
-     *
      * @param numeroMateriaux
      */
     public PanelPont(int numeroMateriaux) {
@@ -73,7 +72,7 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
         //correcteur graphique correspondant au decalage entre l'ecran et le programme
         this.correcteurX = 0;
         this.correcteurY = 0;
-        this.pSave= new Point(0,0);
+        this.pSave = new Point(0, 0);
         this.build = false;
         this.start = false;
         this.pDetected = new Point(-500, -300);
@@ -84,7 +83,6 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
     }
 
     /**
-     *
      * @param g
      */
     public void paint(Graphics g) {
@@ -128,16 +126,16 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
         double x4 = x1 - h * Math.sin(alpha);
         double y4 = y1 + h * Math.cos(alpha);
 
-        int[] xPoints = {(int) (x1+correcteurX), (int) (x2+correcteurX), (int) (x3+correcteurX), (int) (x4+correcteurX)};
-        int[] yPoints = {(int) (740 - y1+correcteurY), (int) (740 - y2+correcteurY), (int) (740 - y3+correcteurY), (int) (740 - y4+correcteurY)};
+        int[] xPoints = {(int) (x1 + correcteurX), (int) (x2 + correcteurX), (int) (x3 + correcteurX), (int) (x4 + correcteurX)};
+        int[] yPoints = {(int) (740 - y1 + correcteurY), (int) (740 - y2 + correcteurY), (int) (740 - y3 + correcteurY), (int) (740 - y4 + correcteurY)};
         int nbPoints = 4;
 
         g.setColor(Color.green);
         g.fillPolygon(xPoints, yPoints, nbPoints);
 
         g.setColor(Color.black);
-        g.fillOval((int) (x1 - 10+correcteurX), (int) (740 - y1 - 10+correcteurY), 20, 20);
-        g.fillOval((int) (x2 - 10+correcteurX), (int) (740 - y2 - 10+correcteurY), 20, 20);
+        g.fillOval((int) (x1 - 10 + correcteurX), (int) (740 - y1 - 10 + correcteurY), 20, 20);
+        g.fillOval((int) (x2 - 10 + correcteurX), (int) (740 - y2 - 10 + correcteurY), 20, 20);
 
         if (this.Detecter) {
             g.setColor(Color.BLUE);
@@ -170,7 +168,6 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
     //cette methode permet de savoir si la point PP appartient a une poutre du pont que je viens de construire
 
     /**
-     *
      * @param PP
      */
     public void detectionPoutre(Point PP) {
@@ -226,7 +223,6 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
     }
 
     /**
-     *
      * @param PP
      * @param rayon
      */
@@ -306,7 +302,6 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
     }
 
     /**
-     *
      * @param PP
      */
     public void pointCliquable(Point PP) {
@@ -358,7 +353,6 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
     }
 
     /**
-     *
      * @param g
      * @param V
      * @param dis
@@ -387,7 +381,6 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
     }
 
     /**
-     *
      * @param e
      */
     public void mouseClicked(MouseEvent e) {
@@ -409,7 +402,6 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
     }
 
     /**
-     *
      * @param e
      */
     public void mousePressed(MouseEvent e) {
@@ -429,7 +421,6 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
     }
 
     /**
-     *
      * @param e
      */
     public void mouseReleased(MouseEvent e) {
@@ -453,21 +444,18 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
     }
 
     /**
-     *
      * @param e
      */
     public void mouseEntered(MouseEvent e) {
     }
 
     /**
-     *
      * @param e
      */
     public void mouseExited(MouseEvent e) {
     }
 
     /**
-     *
      * @param e
      */
     public void mouseMoved(MouseEvent e) {
@@ -498,7 +486,6 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
     }
 
     /**
-     *
      * @param e
      */
     public void mouseDragged(MouseEvent e) {
@@ -525,7 +512,6 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
     }
 
     /**
-     *
      * @param build
      */
     public void setBuild(boolean build) {
@@ -533,7 +519,6 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
     }
 
     /**
-     *
      * @param start
      */
     public void setStart(boolean start) {
@@ -541,7 +526,6 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
     }
 
     /**
-     *
      * @return
      */
     public LinkedList<Distance> getListeBarre() {
@@ -549,7 +533,6 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
     }
 
     /**
-     *
      * @param a
      */
     public void setNumeroMateriaux(int a) {
@@ -557,7 +540,6 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
     }
 
     /**
-     *
      * @return
      */
     public Vehicule getVehicule() {
@@ -565,7 +547,6 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
     }
 
     /**
-     *
      * @param a
      */
     public void setVehicule(Vehicule a) {
