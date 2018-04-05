@@ -28,7 +28,6 @@ public class Simulation {
 		for(int i =0; i<taille; i++){
 			this.pivotA=this.pivotA+this.pont.get(i).getPoids();
 			this.ponctuelleB=(this.ponctuelleB-(this.pont.get(i).getPoids()*(this.pont.get(i).getBarycentre().getX()-A.getX())/(A.distance(B))));
-			this.tabPointsJonction[i]=this.pont.get(i).getP1();
 		}
 		this.vehicule=vehicule;
 	}

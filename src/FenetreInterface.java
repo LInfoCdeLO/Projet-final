@@ -77,14 +77,13 @@ public class FenetreInterface extends JFrame implements ActionListener, ChangeLi
         start.setBounds(10, 780, 450, 110);
         start.setBackground(Color.green);
         start.setForeground(Color.white);
-        start.repaint();
 
         recommencer = new JButton("RECOMMENCER");
         recommencer.setFont(policeStart);
         recommencer.setBounds(10, 660, 450, 110);
         recommencer.setBackground(Color.red);
         recommencer.setForeground(Color.white);
-        recommencer.repaint();
+        
 
         creer = new JButton("CREER");
         Font policeCreerEffacer = new Font(" Comic Sans MS ", Font.BOLD, 30);
@@ -92,14 +91,13 @@ public class FenetreInterface extends JFrame implements ActionListener, ChangeLi
         creer.setBounds(1020, 20, 250, 70);
         creer.setBackground(Color.green);
         creer.setForeground(Color.black);
-        creer.repaint();
+        
 
         effacer = new JButton("EFFACER");
         effacer.setFont(policeCreerEffacer);
         effacer.setBounds(1020, 110, 250, 70);
         effacer.setBackground(Color.red);
         effacer.setForeground(Color.black);
-        effacer.repaint();
 
         calibrer = new JButton("CALIBRER");
         calibrer.setFont(policeCreerEffacer);
@@ -112,7 +110,6 @@ public class FenetreInterface extends JFrame implements ActionListener, ChangeLi
         creer.addActionListener(this);
         effacer.addActionListener(this);
         calibrer.addActionListener(this);
-        calibrer.repaint();
         //FIN JButton
 
         //Les JRadioButton
@@ -122,21 +119,18 @@ public class FenetreInterface extends JFrame implements ActionListener, ChangeLi
         boutonBeton.setFont(policeJRadioButton);
         boutonBeton.setBackground(Color.white);
         boutonBeton.setForeground(Color.black);
-        boutonBeton.repaint();
 
         boutonBois = new JRadioButton("Bois");
         boutonBois.setBounds(400, 70, 120, 80);
         boutonBois.setFont(policeJRadioButton);
         boutonBois.setBackground(Color.white);
         boutonBois.setForeground(Color.black);
-        boutonBois.repaint();
 
         boutonMetal = new JRadioButton("Metal");
         boutonMetal.setBounds(700, 70, 120, 80);
         boutonMetal.setFont(policeJRadioButton);
         boutonMetal.setBackground(Color.white);
         boutonMetal.setForeground(Color.black);
-        boutonMetal.repaint();
 
 
         materiaux = new ButtonGroup();
@@ -381,8 +375,20 @@ public class FenetreInterface extends JFrame implements ActionListener, ChangeLi
             restart(0);
         }
         //test resistance
-
-
+		
+		Torseur T=new Torseur(conteneur1.getVehicule());
+		
+		Point P=T.Pointrupture(conteneur1.getVehicule().getPoutres());
+		
+		if((P.getX()!=-1)&&(P.getY()!=-1)){
+			JOptionPane.showMessageDialog(this, "Dommage, le pont à cédé!!");
+			restart(0);
+		}
+		else if((P.getX()==-1)&&(P.getY()==-1)){
+			System.out.println("le pont resiste");
+		}
+		
+		
         repaint();
 
     }

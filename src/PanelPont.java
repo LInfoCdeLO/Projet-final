@@ -73,10 +73,10 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
         //correcteur graphique correspondant au decalage entre l'ecran et le programme
         this.correcteurX = 0;
         this.correcteurY = 0;
-        this.pDetected=new Point(-50,-50);
+        this.pSave= new Point(0,0);
         this.build = false;
         this.start = false;
-        this.pDetected = new Point(500, 300);
+        this.pDetected = new Point(-500, -300);
         calibration = false;
         pCalibration = new Point((int) ((p1.getX() + p2.getX()) / 2), (int) ((p1.getY() + p2.getY()) / 2));
         this.setVisible(true);
@@ -128,24 +128,19 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
         double x4 = x1 - h * Math.sin(alpha);
         double y4 = y1 + h * Math.cos(alpha);
 
-        int[] xPoints = {(int) (x1), (int) (x2), (int) (x3), (int) (x4)};
-        int[] yPoints = {(int) (740 - y1), (int) (740 - y2), (int) (740 - y3), (int) (740 - y4)};
+        int[] xPoints = {(int) (x1+correcteurX), (int) (x2+correcteurX), (int) (x3+correcteurX), (int) (x4+correcteurX)};
+        int[] yPoints = {(int) (740 - y1+correcteurY), (int) (740 - y2+correcteurY), (int) (740 - y3+correcteurY), (int) (740 - y4+correcteurY)};
         int nbPoints = 4;
 
         g.setColor(Color.green);
         g.fillPolygon(xPoints, yPoints, nbPoints);
 
         g.setColor(Color.black);
-        g.fillOval((int) (x1 - 10), (int) (740 - y1 - 10), 20, 20);
-        g.fillOval((int) (x2 - 10), (int) (740 - y2 - 10), 20, 20);
+        g.fillOval((int) (x1 - 10+correcteurX), (int) (740 - y1 - 10+correcteurY), 20, 20);
+        g.fillOval((int) (x2 - 10+correcteurX), (int) (740 - y2 - 10+correcteurY), 20, 20);
 
         if (this.Detecter) {
             g.setColor(Color.BLUE);
-            int x = (int) this.pDetected.getX();
-            int y = (int) this.pDetected.getY();
-            g.fillOval(x + this.correcteurX - 5, y + this.correcteurY - 5, 10, 10);
-        } else {
-            g.setColor(Color.RED);
             int x = (int) this.pDetected.getX();
             int y = (int) this.pDetected.getY();
             g.fillOval(x + this.correcteurX - 5, y + this.correcteurY - 5, 10, 10);
@@ -156,13 +151,6 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
             g2.setStroke(new BasicStroke(16, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
             g2.drawLine((int) this.distanceDetectee.getP1().getX() + this.correcteurX, (int) distanceDetectee.getP1().getY() + this.correcteurY, (int) distanceDetectee.getP2().getX() + this.correcteurX, (int) distanceDetectee.getP2().getY() + this.correcteurY);
             g2.setStroke(s);
-        } else {
-            g2.setColor(Color.black);
-            Stroke s = g2.getStroke();
-            g2.setStroke(new BasicStroke(16, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
-            g2.drawLine((int) this.distanceDetectee.getP1().getX() + this.correcteurX, (int) distanceDetectee.getP1().getY() + this.correcteurY, (int) distanceDetectee.getP2().getX() + this.correcteurX, (int) distanceDetectee.getP2().getY() + this.correcteurY);
-            g2.setStroke(s);
-            g.setColor(Color.RED);
         }
 
     }

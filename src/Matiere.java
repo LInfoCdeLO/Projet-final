@@ -18,12 +18,12 @@ public class Matiere {
             case 1:
                 this.densite = 0.450;
                 this.nom = "bois";
-                this.c = new Color(153, 76, 0);
+                this.c = new Color(171, 100, 46);
                 break;
             case 2:
                 this.densite = 8.2;
                 this.nom = "acier";
-                this.c = new Color(213, 213, 213);
+                this.c = new Color(192, 192, 192);
                 break;
             default:
                 this.densite = 2.4;

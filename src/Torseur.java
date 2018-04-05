@@ -21,6 +21,14 @@ public class Torseur implements Comparable<Torseur> {
         this.Y = Y;
         this.M = M;
     }
+    
+    /**
+     *
+     * @param V
+     */
+    public Torseur(Vehicule V) {
+        this.V = V;
+    }
 
     /*On calcul le torseur des action suivant x (effort de traction/compression) et y (effort tranchant) ainsi que le moment M suivant z (flexion)
      *Le problème étant un problème plan les autres composantes sont nulles.On calcule ce torseur sur un segment du pont (poutre) en une position de ce segment (représentée par x).
@@ -183,7 +191,7 @@ public class Torseur implements Comparable<Torseur> {
         Torseur TorseurExtremiteAvant = new Torseur(pont.get(0), simulation.getPivotA() * Math.sin(pont.get(0).getAngle()), simulation.getPivotA() * Math.cos(pont.get(0).getAngle()), 0, this.V);
         Resultat.add(TorseurExtremiteAvant);  //on ajoute le Torseur de la 1er extremitée (point de départ du pont) dans la liste Resultat,
 
-        for (int i = 0; i < pont.size(); i++) { // on parcourt les segments du pont
+        for (int i = 0; i < pont.size()-1; i++) { // on parcourt les segments du pont
             double phi = pont.get(i + 1).getAngle() - pont.get(i).getAngle(); // phi représente l'angle entre deux segments consécutifs
             Torseur Torseurextremite = new Torseur(pont.get(i), TorseurExtremiteAvant.X * Math.cos(phi) + TorseurExtremiteAvant.Y * Math.sin(phi), -TorseurExtremiteAvant.X * Math.sin(phi) + TorseurExtremiteAvant.Y * Math.cos(phi), TorseurExtremiteAvant.M, this.V);
             TorseurExtremiteAvant = Torseurextremite;
@@ -220,6 +228,7 @@ public class Torseur implements Comparable<Torseur> {
         double EcartZ;
         double coordonneex;
         double coordonneey;
+        double sec=5*16.0/20.0;
 
         for (int i = 0; i < pont.size(); i++) {
             for (double j = 0; j <= pont.get(i).getLongueur(); j++) {
@@ -244,17 +253,17 @@ public class Torseur implements Comparable<Torseur> {
             }
         }
         if (pont.get(0).getMatiere().getDensite() == 0.450) {
-            EcartX = (Xmax / 10) - 40 * 1000000;
-            EcartY = (Ymax / 10) - 8 * 100000;
-            EcartZ = (Zmax / 10) - 30.6 * 1000000;
+            EcartX = (Xmax / sec) - 40 * 100;
+            EcartY = (Ymax / sec) - 8 * 100;
+            EcartZ = (Zmax / sec) - 30.6 * 100;
         } else if (pont.get(0).getMatiere().getDensite() == 8.2) {
-            EcartX = (Xmax / 10) - 360 * 1000000;
-            EcartY = (Ymax / 10) - 0.4 * 1000000;
-            EcartZ = (Zmax / 10) - 1.56 * 100000000;
+            EcartX = (Xmax / sec) - 360 * 1000000;
+            EcartY = (Ymax / sec) - 0.4 * 1000000;
+            EcartZ = (Zmax / sec) - 1.56 * 100000000;
         } else {
-            EcartX = (Xmax / 10) - 2.6 * 1000000;
-            EcartY = (Ymax / 10) - 1000000;
-            EcartZ = (Zmax / 10) - 30 * 1000000;
+            EcartX = (Xmax / sec) - 2.6 * 1000000;
+            EcartY = (Ymax / sec) - 1000000;
+            EcartZ = (Zmax / sec) - 30 * 1000000;
         }
 
         if ((EcartX <= 0) && (EcartY <= 0) && (EcartZ <= 0)) {
