@@ -6,7 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Hashtable;
 
-
+/**
+ *
+ */
 public class FenetreInterface extends JFrame implements ActionListener, ChangeListener {
     private PanelPont conteneur1;
     private JPanel conteneur2;
@@ -31,6 +33,9 @@ public class FenetreInterface extends JFrame implements ActionListener, ChangeLi
     private boolean pressStart;
     Timer timer;
 
+    /**
+     *
+     */
     public FenetreInterface() {
         super("On construit des ponts");
         setResizable(false);
@@ -242,6 +247,10 @@ public class FenetreInterface extends JFrame implements ActionListener, ChangeLi
 
     }
 
+    /**
+     *
+     * @param e
+     */
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == boutonBois) {
@@ -303,7 +312,10 @@ public class FenetreInterface extends JFrame implements ActionListener, ChangeLi
         }
     }
 
-
+    /**
+     *
+     * @param e
+     */
     public void stateChanged(ChangeEvent e) {
         if (!pressStart) {
             JSlider source = (JSlider) e.getSource();
@@ -346,6 +358,9 @@ public class FenetreInterface extends JFrame implements ActionListener, ChangeLi
         }
     }
 
+    /**
+     *
+     */
     public void jouer() {
 
         if (conteneur1.getVehicule().moteur()) {
@@ -364,6 +379,10 @@ public class FenetreInterface extends JFrame implements ActionListener, ChangeLi
 
     }
 
+    /**
+     *
+     * @param a
+     */
     public void restart(int a) {
 
         timer.stop();
@@ -388,6 +407,9 @@ public class FenetreInterface extends JFrame implements ActionListener, ChangeLi
         conteneur1.repaint();
     }
 
+    /**
+     *
+     */
     public void haHa() {
         this.setState(ICONIFIED);
         this.setState(NORMAL);

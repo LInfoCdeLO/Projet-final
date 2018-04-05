@@ -1,7 +1,9 @@
 import java.awt.*;
 import java.util.ArrayList;
 
-
+/**
+ *
+ */
 public class Simulation {
 	
 	private ArrayList <Distance> pont;
@@ -9,7 +11,14 @@ public class Simulation {
 	private double ponctuelleB;
 	private Vehicule vehicule;
 	private Point [] tabPointsJonction;
-	
+
+	/**
+	 *
+	 * @param listePoutres
+	 * @param A
+	 * @param B
+	 * @param vehicule
+	 */
 	public Simulation(ArrayList <Distance> listePoutres, Point A, Point B, Vehicule vehicule){
 		this.pont=listePoutres;
 		this.pivotA=0;
@@ -23,7 +32,11 @@ public class Simulation {
 		}
 		this.vehicule=vehicule;
 	}
-	
+
+	/**
+	 *
+	 * @return
+	 */
 	public double getPivotA(){
 		return this.pivotA;
 	}

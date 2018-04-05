@@ -8,6 +8,9 @@ import java.util.LinkedList;
 //    /!\ AUNCUNE des lignes de codes si dessous n'est inutile. Sans doute ne sont-elles pas toutes optimisees mais elles ne sont en aucun cas inutiles, si vous ne comprenez pas a quoi elles servent c'est que vous n'avez pas bien compris le programme
 //        Bon courage ^^
 
+/**
+ *
+ */
 public class PanelPont extends JPanel implements MouseListener, MouseMotionListener {
 
     private Vehicule monVehicule;
@@ -43,7 +46,10 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
     private LinkedList<Distance> listeBarre = new LinkedList<>();//liste des poutres de mon pont
     private boolean calibration;
 
-
+    /**
+     *
+     * @param numeroMateriaux
+     */
     public PanelPont(int numeroMateriaux) {
         super();
         monVehicule = new Vehicule(1, 80, 20, 40, 50);
@@ -76,7 +82,10 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
         repaint();
     }
 
-
+    /**
+     *
+     * @param g
+     */
     public void paint(Graphics g) {
 
         super.paint(g);
@@ -157,7 +166,9 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
 
     }
 
-
+    /**
+     *
+     */
     public void calibration() {
         if (!start) {
             System.out.println("calibration true");
@@ -168,6 +179,11 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
     }
 
     //cette methode permet de savoir si la point PP appartient a une poutre du pont que je viens de construire
+
+    /**
+     *
+     * @param PP
+     */
     public void detectionPoutre(Point PP) {
 
         if (!start) {
@@ -220,6 +236,11 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
         }
     }
 
+    /**
+     *
+     * @param PP
+     * @param rayon
+     */
     //cette methode permet de savoir si la point PP est un point particulier de mon interface (joint entre les poutres)
     public void detectionPoint(Point PP, int rayon) {//
 
@@ -295,6 +316,10 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
         }
     }
 
+    /**
+     *
+     * @param PP
+     */
     public void pointCliquable(Point PP) {
 
         if (!start) {
@@ -343,6 +368,13 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
         }
     }
 
+    /**
+     *
+     * @param g
+     * @param V
+     * @param dis
+     * @param g2
+     */
     public void paintBarre(Graphics g, boolean V, Distance dis, Graphics2D g2) {
 
         if (V) {
@@ -365,7 +397,10 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
         }
     }
 
-
+    /**
+     *
+     * @param e
+     */
     public void mouseClicked(MouseEvent e) {
 
         if (!start) {
@@ -384,6 +419,10 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
         }
     }
 
+    /**
+     *
+     * @param e
+     */
     public void mousePressed(MouseEvent e) {
 
         if (!start) {
@@ -400,6 +439,10 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
         }
     }
 
+    /**
+     *
+     * @param e
+     */
     public void mouseReleased(MouseEvent e) {
 
         if (!start) {
@@ -420,12 +463,24 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
         }
     }
 
+    /**
+     *
+     * @param e
+     */
     public void mouseEntered(MouseEvent e) {
     }
 
+    /**
+     *
+     * @param e
+     */
     public void mouseExited(MouseEvent e) {
     }
 
+    /**
+     *
+     * @param e
+     */
     public void mouseMoved(MouseEvent e) {
 
         if (!start) {
@@ -453,6 +508,10 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
 
     }
 
+    /**
+     *
+     * @param e
+     */
     public void mouseDragged(MouseEvent e) {
 
         if (!start) {
@@ -469,30 +528,57 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
         }
     }
 
+    /**
+     *
+     */
     public void setListeBarre() {
         this.listeBarre = new LinkedList<Distance>();
     }
 
+    /**
+     *
+     * @param build
+     */
     public void setBuild(boolean build) {
         this.build = build;
     }
 
+    /**
+     *
+     * @param start
+     */
     public void setStart(boolean start) {
         this.start = start;
     }
 
+    /**
+     *
+     * @return
+     */
     public LinkedList<Distance> getListeBarre() {
         return this.listeBarre;
     }
 
+    /**
+     *
+     * @param a
+     */
     public void setNumeroMateriaux(int a) {
         this.numeroMateriaux = a;
     }
 
+    /**
+     *
+     * @return
+     */
     public Vehicule getVehicule() {
         return monVehicule;
     }
 
+    /**
+     *
+     * @param a
+     */
     public void setVehicule(Vehicule a) {
         this.monVehicule = a;
     }

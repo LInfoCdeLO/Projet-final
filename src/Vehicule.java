@@ -1,6 +1,9 @@
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ *
+ */
 public class Vehicule {
 
     private int type;
@@ -24,7 +27,14 @@ public class Vehicule {
     private Distance poutre2;
     private ArrayList<Distance> poutres;
 
-
+    /**
+     *
+     * @param a
+     * @param b
+     * @param c
+     * @param d
+     * @param e
+     */
     public Vehicule(int a, double b, double c, double d, double e) {
         type = a;
         poids = b;
@@ -65,6 +75,10 @@ public class Vehicule {
 
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean moteur() {
 
         boolean basculer = false;
@@ -246,6 +260,11 @@ public class Vehicule {
 
     }
 
+    /**
+     *
+     * @param d
+     * @return
+     */
     public boolean appartientPoutre(Distance d) {
         if ((poutre1.getP1().getX() == d.getP1().getX()) && (poutre1.getP1().getY() == d.getP1().getY()) && (poutre1.getP2().getX() == d.getP2().getX()) && (poutre1.getP2().getY() == d.getP2().getY())) {
             return true;
@@ -256,73 +275,140 @@ public class Vehicule {
         }
     }
 
-
+    /**
+     *
+     * @param a
+     */
     public void setPoutres(ArrayList<Distance> a) {
         this.poutres = a;
         poutres.add(new Distance(new Point(0, 308), new Point(250, 308), 1));
         poutres.add(new Distance(new Point(1050, 308), new Point(1500, 308), 1));
     }
 
+    /**
+     *
+     * @param a
+     */
     public void setType(int a) {
         this.type = a;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getType() {
         return type;
     }
 
+    /**
+     *
+     * @param a
+     */
     public void setPoids(double a) {
         this.poids = a;
     }
 
+    /**
+     *
+     * @return
+     */
     public double getPoids() {
         return poids;
     }
 
+    /**
+     *
+     * @param a
+     */
     public void setLargeur(double a) {
         this.largeur = a;
     }
 
+    /**
+     *
+     * @return
+     */
     public double getLargeur() {
         return largeur;
     }
 
+    /**
+     *
+     * @param a
+     */
     public void setHauteur(double a) {
         this.hauteur = a;
     }
 
+    /**
+     *
+     * @return
+     */
     public double getHauteur() {
         return hauteur;
     }
 
+    /**
+     *
+     * @param a
+     */
     public void setVitesse(double a) {
         this.vitesse = a;
     }
 
+    /**
+     *
+     * @return
+     */
     public double getVitesse() {
         return vitesse;
     }
 
+    /**
+     *
+     * @return
+     */
     public double getX1() {
         return R1[0][0];
     }
 
+    /**
+     *
+     * @return
+     */
     public double getX2() {
         return R2[0][0];
     }
 
+    /**
+     *
+     * @return
+     */
     public double getY1() {
         return 740 - R1[0][1];
     }
 
+    /**
+     *
+     * @return
+     */
     public double getY2() {
         return 740 - R2[0][1];
     }
 
+    /**
+     *
+     * @return
+     */
     public double getX() {
         return (R1[0][0] + R2[0][0]) / 2;
     }
 
+    /**
+     *
+     * @return
+     */
     public double getY() {
         return (740 - R1[0][1] + 740 - R2[0][1]) / 2;
     }

@@ -1,12 +1,18 @@
 import java.awt.*;
 
-
+/**
+ *
+ */
 public class Matiere {
 
     private double densite;
     private String nom;
     private Color c;
 
+    /**
+     *
+     * @param nindentification
+     */
     public Matiere(int nindentification) {
         switch (nindentification) {
             case 1:
@@ -27,10 +33,18 @@ public class Matiere {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public double getDensite() {
         return densite;
     }
 
+    /**
+     *
+     * @return
+     */
     public Color getColor() {
         return c;
     }

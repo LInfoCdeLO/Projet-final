@@ -3,12 +3,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 
+/**
+ *
+ */
 public class ConstructionPont {
 
     private LinkedList<Distance> listePoutre;
     private ArrayList<Distance> pont;
     private boolean creationListe;
 
+    /**
+     *
+     * @param listePoutre
+     */
     public ConstructionPont(LinkedList<Distance> listePoutre) {
         this.creationListe = false;
         this.listePoutre = new LinkedList<Distance>();
@@ -23,6 +30,9 @@ public class ConstructionPont {
 
     }
 
+    /**
+     *
+     */
     public void selectionChemin() {
         Point A = new Point(250, 308);
         Point B = new Point(1050, 308);
@@ -121,10 +131,18 @@ public class ConstructionPont {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean getCreationListe() {
         return this.creationListe;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<Distance> getPont() {
         return this.pont;
     }
