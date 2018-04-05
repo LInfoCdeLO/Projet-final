@@ -457,7 +457,7 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
                     this.listeBarre.add(D);
                 }
             }
-            this.distanceDetectee = new Distance(new Point(-50, -50), new Point(-50, -50), 1);
+            this.dMove = new Distance(new Point(-50, -50), new Point(-50, -50), 1);
             this.appuyer = false;
             repaint();
         }
