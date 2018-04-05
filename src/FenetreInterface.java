@@ -408,7 +408,7 @@ public class FenetreInterface extends JFrame implements ActionListener, ChangeLi
         conteneur1.setBuild(false);
         conteneur1.setStart(false);
         for (Distance d : conteneur1.getListeBarre()) {
-			d.setMatierePoutre(1);
+            d.setMatierePoutre(1);
         }
         conteneur1.setNumeroMateriaux(1);
 

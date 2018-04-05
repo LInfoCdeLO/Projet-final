@@ -37,18 +37,16 @@ public class Vehicule {
      */
     public Vehicule(int a, double b, double c, double d, double e) {
         type = a;
-        
-        if(a==1){
-			kp=10000;
-		}
-		else if(a==2){
-			kp=100000;
-		}
-		else{
-			kp=1000000;
-		}
-        
-        
+
+        if (a == 1) {
+            kp = 10000;
+        } else if (a == 2) {
+            kp = 100000;
+        } else {
+            kp = 1000000;
+        }
+
+
         poids = b;
         largeur = c;
         hauteur = d;
@@ -409,10 +407,10 @@ public class Vehicule {
      * @return
      */
     public ArrayList<Distance> getPoutres() {
-		ArrayList<Distance> p=new ArrayList<Distance>();
-		p=poutres;
-		p.remove(p.size()-1);
-		p.remove(p.size()-1);
+        ArrayList<Distance> p = new ArrayList<Distance>();
+        p = poutres;
+        p.remove(p.size() - 1);
+        p.remove(p.size() - 1);
         return p;
     }
 }
