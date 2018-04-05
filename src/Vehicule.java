@@ -11,6 +11,7 @@ public class Vehicule {
     private double largeur;
     private double hauteur;
     private double vitesse;
+    private double kp;//constante de raideur du ressort lié aux poutres
 
     private double[][] R1;
     private double[][] R2;
@@ -36,6 +37,18 @@ public class Vehicule {
      */
     public Vehicule(int a, double b, double c, double d, double e) {
         type = a;
+        
+        if(a==1){
+			kp=10000;
+		}
+		else if(a==2){
+			kp=100000;
+		}
+		else{
+			kp=1000000;
+		}
+        
+        
         poids = b;
         largeur = c;
         hauteur = d;
@@ -84,11 +97,10 @@ public class Vehicule {
         double echelle = 20; //convertion pixels/metre
         double g1 = 9.81; //acceleration de la pesanteur
         double g2 = g1 * echelle; //acceleration de la pesanteur convertie en pixel
-        double kp = 100000; //constante de raideur du ressort lié aux poutres
         double vit = (vitesse / 3.6) * echelle; //vitesse en pixels/seconde
         double lp = 8; //epaisseur d'une poutre/2
         double rayon = 10; //rayon des roues du vehicule
-        double gamma = 10000; //coefficient d'amortissement visqueux
+        double gamma = 3000; //coefficient d'amortissement visqueux
 
         double dt = 0.01; //pas de temps d'intégration
 
@@ -397,6 +409,10 @@ public class Vehicule {
      * @return
      */
     public ArrayList<Distance> getPoutres() {
-        return this.poutres;
+		ArrayList<Distance> p=new ArrayList<Distance>();
+		p=poutres;
+		p.remove(p.size()-1);
+		p.remove(p.size()-1);
+        return p;
     }
 }

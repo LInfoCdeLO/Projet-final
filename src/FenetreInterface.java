@@ -407,6 +407,9 @@ public class FenetreInterface extends JFrame implements ActionListener, ChangeLi
         conteneur1.setVehicule(new Vehicule(1, 80, 20, 40, 50));
         conteneur1.setBuild(false);
         conteneur1.setStart(false);
+        for (Distance d : conteneur1.getListeBarre()) {
+			d.setMatierePoutre(1);
+        }
         conteneur1.setNumeroMateriaux(1);
 
         if (a == 1) {
