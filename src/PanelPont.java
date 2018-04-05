@@ -47,7 +47,7 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
     private int correcteurX;    //correcteur du a l'ecran selon X
     private int correcteurY;    //correcteur du a l'ectan selon Y
     private int numeroMateriaux;// la nature de ma poutre
-    private LinkedList<Distance> listeBarre = new LinkedList<Distance>();//liste des poutres de mon pont
+    private LinkedList<Distance> listeBarre = new LinkedList<>();//liste des poutres de mon pont
     private boolean calibration;
 
 
@@ -94,7 +94,7 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
         Graphics2D g2 = (Graphics2D) g;
 
         g.drawImage(this.background, 0, 0, this);
-        g.drawImage(this.plateforme, 0 + this.correcteurX, 300 + this.correcteurY, this);
+        g.drawImage(this.plateforme, this.correcteurX, 300 + this.correcteurY, this);
         g.drawImage(this.plateforme, 1050 + this.correcteurX, 300 + this.correcteurY, this);
 
         g.setColor(Color.RED);
@@ -102,15 +102,12 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
         g.fillOval((int) p2.getX() + this.correcteurX - 8, (int) p2.getY() + this.correcteurY - 8, 16, 16);
         if(calibration) {g.fillOval((int) pCalibration.getX() - 8, (int) pCalibration.getY() - 8, 16, 16);}
 
-        boolean V = false;
-
         if (cliquable) {
-            paintBarre(g, V, this.dMove, g2);
+            paintBarre(g, false, this.dMove, g2);
         }
 
-        V = true;
         for (Distance dis : this.listeBarre) {
-            paintBarre(g, V, dis, g2);
+            paintBarre(g, true, dis, g2);
             //System.out.println("Coordonnees: x:" + dis.getP1().getX());
         }
         //Vehicule
@@ -140,7 +137,7 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
         g.fillOval((int)(x1-10),(int)(740-y1-10),20,20);
         g.fillOval((int)(x2-10),(int)(740-y2-10),20,20);
 
-		if (this.Detecter == true) {
+		if (this.Detecter) {
             g.setColor(Color.BLUE);
             int x = (int) this.pDetected.getX();
             int y = (int) this.pDetected.getY();
@@ -151,7 +148,7 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
             int y = (int) this.pDetected.getY();
             g.fillOval(x + this.correcteurX - 5, y + this.correcteurY - 5, 10, 10);
         }
-        if (DetecterPoutre == true) {
+        if (DetecterPoutre) {
             g2.setColor(Color.red);
             Stroke s = g2.getStroke();
             g2.setStroke(new BasicStroke(16));
@@ -172,7 +169,7 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
 
 
     public void calibration(){
-        if (start == false) {
+        if (!start) {
             System.out.println("calibration true");
             calibration = true;
             correcteurY = 0;
@@ -183,7 +180,7 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
     //cette methode permet de savoir si la point PP appartient a une poutre du pont que je viens de construire
     public void detectionPoutre(Point PP) {
 
-        if (start == false) {
+        if (!start) {
 
             this.DetecterPoutre = false;//initialisation de DecterPoutre a false: aucune poutre n'est encore detectee
             int n = 0;
@@ -234,7 +231,7 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
     //cette methode permet de savoir si la point PP est un point particulier de mon interface (joint entre les poutres)
     public void detectionPoint(Point PP, int rayon) {//
 
-        if (start == false) {
+        if (!start) {
             this.Detecter = false;
             this.n = 0;//initialise le compteur a 0
             for (Distance dis : this.listeBarre) {//parcourir la liste des distances
@@ -242,11 +239,11 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
                     if (PP.getY() <= dis.getP1().getY() + rayon && PP.getY() >= dis.getP1().getY() - rayon) {//regarde si le point passe en parametre se trouve a proximite du point P1 de la distance passee en parametre
                         this.Detecter = true;//un point est Detecte!!
                         this.pDetected = dis.getP1();//pDetected prend la valeur du point qui a ete detecte
-                        if (appuyer == true && PP.equals(this.pReleased)) {
+                        if (appuyer && PP.equals(this.pReleased)) {
                             this.pReleased = dis.getP1();//permet de raccorder deux poutres entre elles: si le point avec lequel j'etire ma poutre au moment de sa construction est proche d'un autre point au moment ou je relache le bouton de la sourie (et donc finalise la construction de ma poutre) le point relacher devient le point detecter et la nouvelle sitance possede un P2 egale a ce point
                             break;
                         }
-                        if (build != true && PP.equals(this.pClicked)) {
+                        if (!build && PP.equals(this.pClicked)) {
                             this.pClicked = dis.getP1();
                             break;
                         }
@@ -259,11 +256,11 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
                     if (PP.getY() <= dis.getP2().getY() + rayon && PP.getY() >= dis.getP2().getY() - rayon) {//regarde si le point passe en parametre se trouve a proximite du point P1 de la distance
                         this.Detecter = true;
                         this.pDetected = dis.getP2();
-                        if (appuyer == true && PP.equals(this.pReleased)) {
+                        if (appuyer && PP.equals(this.pReleased)) {
                             this.pReleased = dis.getP2();
                             break;
                         }
-                        if (build != true && PP.equals(this.pClicked)) {
+                        if (!build && PP.equals(this.pClicked)) {
                             this.pClicked = dis.getP2();
                             break;
                         }
@@ -280,7 +277,7 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
                     this.pDetected = p1;
                     n++;
                     System.out.println("Detecte " + n + " : " + this.pDetected.getX() + " " + this.pDetected.getY());
-                    if (appuyer == true && PP.equals(this.pReleased)) {
+                    if (appuyer && PP.equals(this.pReleased)) {
                         this.pReleased = p1;
                     }
 
@@ -293,7 +290,7 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
                     this.pDetected = p2;
                     n++;
                     System.out.println("Detecte " + n + " : " + this.pDetected.getX() + " " + this.pDetected.getY());
-                    if (appuyer == true && PP.equals(this.pReleased)) {
+                    if (appuyer && PP.equals(this.pReleased)) {
                         this.pReleased = p2;
                     }
                 }
@@ -308,7 +305,7 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
 
     public void pointCliquable(Point PP) {
 
-        if (start == false) {
+        if (!start) {
             this.pCliquable = new Point(0, 0);
 
             for (Distance dis : this.listeBarre) {
@@ -379,7 +376,7 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
 
     public void mouseClicked(MouseEvent e) {
 
-        if (start == false) {
+        if (!start) {
             if (calibration){
                 correcteurX = e.getX() - (int) pCalibration.getX() ;
                 correcteurY = e.getY() - (int) pCalibration.getY() ;
@@ -387,7 +384,7 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
                 System.out.println("calib false");
             }else {
                 this.pClicked = new Point(e.getX(), e.getY());
-                if (this.build == false) {//je suis entrain d'effacer un poutre
+                if (!this.build) {//je suis entrain d'effacer un poutre
                     this.detectionPoutre(this.pClicked);//regarde si le point sur lequel je viens de cliquer appartient a une poutre
                     repaint();
                 }
@@ -397,7 +394,7 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
 
     public void mousePressed(MouseEvent e) {
 
-        if (start == false) {
+        if (!start) {
             this.pReleased = new Point(0, 0);//reinitialise le point pReleased
             this.pPressed = new Point(e.getX(), e.getY());
             this.appuyer = true;//je suis entrain d'appuyer sur le bouton
@@ -413,9 +410,9 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
 
     public void mouseReleased(MouseEvent e) {
 
-        if (start == false) {
+        if (!start) {
             this.pReleased = new Point(e.getX(), e.getY());
-            if (build == true && cliquable == true) {// si je suis entrain de construire
+            if (build && cliquable) {// si je suis entrain de construire
                 Point point1 = new Point((int) this.pCliquable.getX(), (int) this.pCliquable.getY());
                 Point point2 = new Point(0, 0);
                 this.detectionPoint(this.pReleased, 20);
@@ -434,7 +431,7 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
 
     public void mouseMoved(MouseEvent e) {
 
-        if (start == false) {
+        if (!start) {
             this.pMoved = new Point(e.getX(), e.getY());
             //permet de savoir si mon curseur se trouve sur un point remarquable (joint)
             detectionPoint(this.pMoved, 10);
@@ -443,12 +440,12 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
                 this.plusUn = true;//initialisation d'un boolean sur true afin d'avoir un paint du point detecte dynamique
                 repaint();
             }
-            if (this.Detecter == false && this.plusUn == true) {//permet de ramner la couteur du point detecter a sa couleur d'origine (rouge) une fois que l'on est plus sur le point remarquable
+            if (!this.Detecter && this.plusUn) {//permet de ramner la couteur du point detecter a sa couleur d'origine (rouge) une fois que l'on est plus sur le point remarquable
                 repaint();
                 this.plusUn = false;
             }
 
-            if (this.build == false) {
+            if (!this.build) {
                 detectionPoutre(this.pMoved);
                 if (this.DetecterPoutre) {
                     repaint();
@@ -461,11 +458,11 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
 
     public void mouseDragged(MouseEvent e) {
 
-        if (start == false) {
+        if (!start) {
             //permet de previsualiser les poutres lors de leur construction
             this.pDragged = new Point(e.getX(), e.getY());
             detectionPoint(this.pDragged, 20);
-            if (this.cliquable == true) {
+            if (this.cliquable) {
                 Point point1 = this.pCliquable;
                 Point point2 = this.pDragged;
                 //construit une distance provisoir entre le point ou j'ai presse la souris et le point ou a ete dragge la sourie
