@@ -188,7 +188,7 @@ public class Torseur implements Comparable<Torseur> {
             //On crée cette instance à l'aide les composantes du Torseur des actions s'exercants sur l'extremité gauche de la poutre numero i.
             //Ces composantes sont correctements projetées à l'aide de l'angle phi.
             Torseur Torseurextremite = new Torseur(pont.get(i), TorseurExtremiteAvant.X * Math.cos(phi) + TorseurExtremiteAvant.Y * Math.sin(phi), -TorseurExtremiteAvant.X * Math.sin(phi) + TorseurExtremiteAvant.Y * Math.cos(phi), TorseurExtremiteAvant.M, this.V);
-            
+
             TorseurExtremiteAvant = Torseurextremite; // On sauvergarde le Torseur afin d'avoir les composantes du Torseur des actions s'exercants sur l'extremité gauche de la poutre numero i+1 (pour le prochain passage dans la boucle) 
             Resultat.add(Torseurextremite);
         }
@@ -215,7 +215,7 @@ public class Torseur implements Comparable<Torseur> {
         double Ymax = 0;    //Ymax est la composante de l'effort tranchant maximum de l'ensemble du pont
         double Zmax = 0;    //Zmax est la composante de la flexion maximum de l'ensemble du pont
         double Mmax;
-        double posM;    
+        double posM;
         double SegmentM;// Segment X est le numéro du segment sur lequel Xmax est atteint
         double EcartX;  // Ecart entre la solicitation de traction/compression et la valeur limite de solicitation (valeur au dessus de laquelle le pont se casse) 
         double EcartY;  // Ecart entre la solicitation de l'effort tranchant et la valeur limite de solicitation 
@@ -261,7 +261,7 @@ public class Torseur implements Comparable<Torseur> {
             EcartY = (Ymax / sec) - 1000000;
             EcartZ = (Zmax / sec) - 30 * 1000000;
         }
-         // On retourne le point pour lequel l'ecart entre la solicitation et la valeur limite de solicitation est le plus grand
+        // On retourne le point pour lequel l'ecart entre la solicitation et la valeur limite de solicitation est le plus grand
         if ((EcartX <= 0) && (EcartY <= 0) && (EcartZ <= 0)) {
 
             return new Point(-1, -1);
