@@ -169,7 +169,7 @@ public class Torseur implements Comparable<Torseur> {
     }
 
 
-    /* méthode renvoyant une liste comportant les torseurs de chaque extremité gauche des segments du pont.
+    /* méthode renvoyant une liste comportant les torseurs s'exprimants sur chaque extremité gauche des segments du pont.
     Cette liste est ordonnée (Le ième torseur est le torseur de l'extremité gauche du ième segment en comptant de gauche à droite) */
 
     /**
@@ -180,12 +180,16 @@ public class Torseur implements Comparable<Torseur> {
         Simulation simulation = new Simulation(pont, new Point(250, 432), new Point(1050, 432), V);
         ArrayList<Torseur> Resultat = new ArrayList<>();
         Torseur TorseurExtremiteAvant = new Torseur(pont.get(0), simulation.getPivotA() * Math.sin(pont.get(0).getAngle()), simulation.getPivotA() * Math.cos(pont.get(0).getAngle()), 0, this.V);
-        Resultat.add(TorseurExtremiteAvant);  //on ajoute le Torseur de la 1er extremitée (point de départ du pont) dans la liste Resultat,
+        Resultat.add(TorseurExtremiteAvant);  //on ajoute le Torseur de la 1er extremitée (point de départ du pont) dans la liste Resultat. Les composantes de ce Torseur sont correctement projetées.
 
         for (int i = 0; i < pont.size() - 1; i++) { // on parcourt les segments du pont
             double phi = pont.get(i + 1).getAngle() - pont.get(i).getAngle(); // phi représente l'angle entre deux segments consécutifs
+            // on crée une instance Torseurextremite qui calcul les actions mécaniques de la poutre numéro i à son extremité droite. 
+            //On crée cette instance à l'aide les composantes du Torseur des actions s'exercants sur l'extremité gauche de la poutre numero i.
+            //Ces composantes sont correctements projetées à l'aide de l'angle phi.
             Torseur Torseurextremite = new Torseur(pont.get(i), TorseurExtremiteAvant.X * Math.cos(phi) + TorseurExtremiteAvant.Y * Math.sin(phi), -TorseurExtremiteAvant.X * Math.sin(phi) + TorseurExtremiteAvant.Y * Math.cos(phi), TorseurExtremiteAvant.M, this.V);
-            TorseurExtremiteAvant = Torseurextremite;
+            
+            TorseurExtremiteAvant = Torseurextremite; // On sauvergarde le Torseur afin d'avoir les composantes du Torseur des actions s'exercants sur l'extremité gauche de la poutre numero i+1 (pour le prochain passage dans la boucle) 
             Resultat.add(Torseurextremite);
         }
         return Resultat;
@@ -201,25 +205,26 @@ public class Torseur implements Comparable<Torseur> {
     public Point Pointrupture(ArrayList<Distance> pont) {
         ArrayList<Torseur> TorseurExtremite = getTorseursExtremites(pont);
 
-        double Xmax = 0;
-        double posX = 0;
-        double SegmentX = 0;
-        double posY = 0;
-        double SegmentY = 0;
-        double posZ = 0;
-        double SegmentZ = 0;
-        double Ymax = 0;
-        double Zmax = 0;
+        double Xmax = 0; // Xmax est la composante de traction/compression maximum de l'ensemble du pont
+        double posX = 0;  // posX représente la position sur le segment (distance par rapport à l'extremité gauche du segment) pour laquelle Xmax est atteint
+        double SegmentX = 0; // SegmentX est le numéro du segment sur lequel Xmax est atteint
+        double posY = 0;     //posY représente la position sur le segment  pour laquelle Ymax est atteint
+        double SegmentY = 0;// SegmentY est le numéro du segment sur lequel Ymax est atteint
+        double posZ = 0;    //posZ représente la position sur le segment pour laquelle Zmax est atteint
+        double SegmentZ = 0;// SegmentZ est le numéro du segment sur lequel Zmax est atteint
+        double Ymax = 0;    //Ymax est la composante de l'effort tranchant maximum de l'ensemble du pont
+        double Zmax = 0;    //Zmax est la composante de la flexion maximum de l'ensemble du pont
         double Mmax;
-        double posM;
-        double SegmentM;
-        double EcartX;
-        double EcartY;
-        double EcartZ;
-        double coordonneex;
-        double coordonneey;
-        double sec = 5 * 16.0 / 20.0;
+        double posM;    
+        double SegmentM;// Segment X est le numéro du segment sur lequel Xmax est atteint
+        double EcartX;  // Ecart entre la solicitation de traction/compression et la valeur limite de solicitation (valeur au dessus de laquelle le pont se casse) 
+        double EcartY;  // Ecart entre la solicitation de l'effort tranchant et la valeur limite de solicitation 
+        double EcartZ;  // Ecart entre la solicitation de flexion et la valeur limite de solicitation 
+        double coordonneex; // coordonnée selon x du point de rupture du pont
+        double coordonneey; // coordonnée selon y du point de rupture du pont
+        double sec = 5 * 16.0 / 20.0; // section des segments constituants le pont
 
+        // on parcourt les segments du pont ainsi que les positions de chaque segment afin de determiner les valeur de Xmax Ymax et Zmax
         for (int i = 0; i < pont.size(); i++) {
             for (double j = 0; j <= pont.get(i).getLongueur(); j++) {
                 Torseur a = new Torseur(pont.get(i), TorseurExtremite.get(i).getX(), TorseurExtremite.get(i).getY(), TorseurExtremite.get(i).getM(), j, this.V);
@@ -242,6 +247,7 @@ public class Torseur implements Comparable<Torseur> {
                 }
             }
         }
+        // Les valeur de sollicitation maximum sont différentes selon le materiau utilisé. On différencie donc les cas.
         if (pont.get(0).getMatiere().getDensite() == 0.450) {
             EcartX = (Xmax / sec) - 40 * 100;
             EcartY = (Ymax / sec) - 8 * 100;
@@ -255,7 +261,7 @@ public class Torseur implements Comparable<Torseur> {
             EcartY = (Ymax / sec) - 1000000;
             EcartZ = (Zmax / sec) - 30 * 1000000;
         }
-
+         // On retourne le point pour lequel l'ecart entre la solicitation et la valeur limite de solicitation est le plus grand
         if ((EcartX <= 0) && (EcartY <= 0) && (EcartZ <= 0)) {
 
             return new Point(-1, -1);
