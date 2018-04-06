@@ -25,7 +25,7 @@ Vous devez compiler ce programme une première fois avant de pouvoir le lancer.
 
 ## Aperçu du GUI
 
-![Aperçu](http://github.com/linfocdelo/projet-final/apercu.png)
+![Aperçu](https://raw.githubusercontent.com/LInfoCdeLO/Projet-final/master/apercu.png)
 
 ## Auteurs
 
