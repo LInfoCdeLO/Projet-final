@@ -7,34 +7,37 @@ import java.awt.event.ActionListener;
 import java.util.Hashtable;
 
 /**
- *
+ * Classe qui gere la fenetre principale avec tous les boutons et les listeners
  */
 public class FenetreInterface extends JFrame implements ActionListener, ChangeListener {
-    private PanelPont conteneur1;
-    private JPanel conteneur2;
-    private JPanel conteneur3;
+    private PanelPont conteneur1; //Panel ou l utilisateur construit le pont et ou le vehicule se deplace
+    private JPanel conteneur2; //panel de droite contenant les bouttons start, recommencer, calibrage et les JSlider
+    private JPanel conteneur3; //panel du dessous contenant les RadioButton et les boutons creer et effacer
+    //les diferents JLabels
     private JLabel texte1;
     private JLabel texte2;
     private JLabel texte3;
     private JLabel texte4;
-    private JPanel conteneurTotal;
-    private JButton start;
-    private JButton recommencer;
-    private JButton creer;
-    private JButton effacer;
-    private JButton calibrer;
+    private JPanel conteneurTotal; //Panel total qui correspond a la taille de la fenetre
+    private JButton start; //bouton pour lancer la simulation
+    private JButton recommencer; //bouton pour reinitialiser tous les parametres
+    private JButton creer; //bouton pour creer des poutres
+    private JButton effacer; //bouton pour effecer les poutres
+    private JButton calibrer; //boutton pour calibrer la position de la souris suivants les ordinateurs
+    //Les RadioButton pour changer la matiere des poutres
     private JRadioButton boutonBeton;
     private JRadioButton boutonBois;
     private JRadioButton boutonMetal;
     private ButtonGroup materiaux;
+    //Les JSlider pour changer les parametres de vitesse, vehicule et poids
     private JSlider selectVehicule;
     private JSlider selectPoids;
     private JSlider selectVitesse;
-    private boolean pressStart;
-    Timer timer;
+    private boolean pressStart; //variable qui permet de savoir si la simulation est lancee et de bloquer les changements de parametres si c est le cas
+    Timer timer; //le timer pour lancer le jeu
 
     /**
-     *
+     * Constructeur de la fenetre qui initialise et place tous les elements
      */
     public FenetreInterface() {
         super("On construit des ponts");
@@ -201,7 +204,7 @@ public class FenetreInterface extends JFrame implements ActionListener, ChangeLi
         //FIN JSlider
 
         //Les Panel
-        conteneur1 = new PanelPont(1);
+        conteneur1 = new PanelPont();
         conteneur1.setLayout(null);
         conteneur1.setBounds(10, 10, 1300, 740);
 
@@ -250,6 +253,8 @@ public class FenetreInterface extends JFrame implements ActionListener, ChangeLi
     }
 
     /**
+     * L ecouteur de type ActionEvent qui permet de changer les parametres suivant le bouton appuye, de demarer ou d arreter la simulation
+     *
      * @param e
      */
     public void actionPerformed(ActionEvent e) {
@@ -261,7 +266,7 @@ public class FenetreInterface extends JFrame implements ActionListener, ChangeLi
                 }
 
                 conteneur1.setNumeroMateriaux(1);
-                System.out.println("Bois");
+                //System.out.println("Bois");
                 repaint();
             }
         } else if (e.getSource() == boutonMetal) {
@@ -271,7 +276,7 @@ public class FenetreInterface extends JFrame implements ActionListener, ChangeLi
                 }
 
                 conteneur1.setNumeroMateriaux(2);
-                System.out.println("Metal");
+                //System.out.println("Metal");
                 repaint();
             }
         } else if (e.getSource() == boutonBeton) {
@@ -281,7 +286,7 @@ public class FenetreInterface extends JFrame implements ActionListener, ChangeLi
                 }
 
                 conteneur1.setNumeroMateriaux(3);
-                System.out.println("Beton");
+                //System.out.println("Beton");
                 repaint();
             }
         } else if (e.getSource() == start) {
@@ -293,19 +298,19 @@ public class FenetreInterface extends JFrame implements ActionListener, ChangeLi
                     conteneur1.getVehicule().setPoutres(chemin.getPont());
                     timer.start();
                 } else {
-                    JOptionPane.showMessageDialog(this, "Aucun chemin viable n'a été trouvé !!");
+                    JOptionPane.showMessageDialog(this, "Aucun chemin viable n a ete trouve !!");
                 }
             }
-            System.out.println("START");
+            //System.out.println("START");
         } else if (e.getSource() == recommencer) {
             restart(1);
-            System.out.println("Recommencer");
+            //System.out.println("Recommencer");
         } else if (e.getSource() == creer) {
             conteneur1.setBuild(true);
-            System.out.println("creer");
+            //System.out.println("creer");
         } else if (e.getSource() == effacer) {
             conteneur1.setBuild(false);
-            System.out.println("effacer");
+            //System.out.println("effacer");
         } else if (e.getSource() == timer) {
             jouer();
         } else if (e.getSource() == calibrer) {
@@ -314,6 +319,8 @@ public class FenetreInterface extends JFrame implements ActionListener, ChangeLi
     }
 
     /**
+     * Ecouteur pour les JSlider qui change les parametres correspondants
+     *
      * @param e
      */
     public void stateChanged(ChangeEvent e) {
@@ -326,7 +333,7 @@ public class FenetreInterface extends JFrame implements ActionListener, ChangeLi
                     int val = (int) (source.getValue());
 
                     if (val == 1) {
-                        conteneur1.setVehicule(new Vehicule(1, 80 * (double) (selectPoids.getValue() / 2.0), 20, 40, conteneur1.getVehicule().getVitesse()));
+                        conteneur1.setVehicule(new Vehicule(1, 80 * (double) (selectPoids.getValue() / 2.0), 25, 40, conteneur1.getVehicule().getVitesse()));
                     } else if (val == 2) {
                         conteneur1.setVehicule(new Vehicule(2, 500 * (double) (selectPoids.getValue() / 2.0), 70, 50, conteneur1.getVehicule().getVitesse()));
                     } else if (val == 3) {
@@ -334,64 +341,67 @@ public class FenetreInterface extends JFrame implements ActionListener, ChangeLi
                     }
 
                     conteneur1.repaint();
-                    System.out.println("vehicule= " + val);
+                    //System.out.println("vehicule= " + val);
                 } else if (source == selectPoids) {
                     double val = source.getValue() / 2.0;
 
                     if (conteneur1.getVehicule().getType() == 1) {
-                        conteneur1.setVehicule(new Vehicule(1, 80 * val, 20, 40, conteneur1.getVehicule().getVitesse()));
+                        conteneur1.setVehicule(new Vehicule(1, 80 * val, 25, 40, conteneur1.getVehicule().getVitesse()));
                     } else if (conteneur1.getVehicule().getType() == 2) {
                         conteneur1.setVehicule(new Vehicule(2, 500 * val, 70, 50, conteneur1.getVehicule().getVitesse()));
                     } else if (conteneur1.getVehicule().getType() == 3) {
                         conteneur1.setVehicule(new Vehicule(3, 2000 * val, 120, 60, conteneur1.getVehicule().getVitesse()));
                     }
 
-                    System.out.println("poids= X " + val);
+                    //System.out.println("poids= X " + val);
                 } else if (source == selectVitesse) {
                     double val = source.getValue() * 5;
 
                     conteneur1.setVehicule(new Vehicule(conteneur1.getVehicule().getType(), conteneur1.getVehicule().getPoids(), conteneur1.getVehicule().getLargeur(), conteneur1.getVehicule().getHauteur(), val));
 
-                    System.out.println("Vitesse= " + val + " km/h");
+                    //System.out.println("Vitesse= " + val + " km/h");
                 }
             }
         }
     }
 
     /**
-     *
+     * Methode appelee par le timer qui actualise la position du vehicule, teste si il est arrivee ou s est retournee puis teste la resistance du pont avant de repaint la fenetre
      */
     public void jouer() {
 
+        //test vehicule
         if (conteneur1.getVehicule().moteur()) {
             restart(0);
-            JOptionPane.showMessageDialog(this, "Votre véhicule s'est retourné, veuillez recommencer.");
+            JOptionPane.showMessageDialog(this, "Votre vehicule s est retourne, veuillez recommencer.");
         }
 
         if (conteneur1.getVehicule().getX2() >= 1230) {
-            JOptionPane.showMessageDialog(this, "Félicitation!! Vous avez traversé sain et sauf! (ou presque...)");
+            JOptionPane.showMessageDialog(this, "Felicitation!! Vous avez traverse sain et sauf! (ou presque...)");
             restart(0);
         }
         //test resistance
+        if (pressStart) {
+            Torseur T = new Torseur(conteneur1.getVehicule());
 
-        Torseur T = new Torseur(conteneur1.getVehicule());
+            Point P = T.Pointrupture(conteneur1.getVehicule().getPoutres());
 
-        Point P = T.Pointrupture(conteneur1.getVehicule().getPoutres());
-
-        if ((P.getX() != -1) && (P.getY() != -1)) {
-            JOptionPane.showMessageDialog(this, "Dommage, le pont à cédé!!");
-            restart(0);
-        } else if ((P.getX() == -1) && (P.getY() == -1)) {
-            System.out.println("le pont resiste");
+            if ((P.getX() != -1) && (P.getY() != -1)) {
+                JOptionPane.showMessageDialog(this, "Dommage, le pont a cede!!");
+                restart(0);
+            } else if ((P.getX() == -1) && (P.getY() == -1)) {
+                //System.out.println("le pont resiste");
+            }
         }
-
 
         repaint();
 
     }
 
     /**
-     * @param a
+     * methode qui permet de reinitialiser tous les parametres et d effacer les poutres existantes
+     *
+     * @param a on met 1 si on veut reinitialiser les poutres
      */
     public void restart(int a) {
 
@@ -404,7 +414,7 @@ public class FenetreInterface extends JFrame implements ActionListener, ChangeLi
         selectVitesse.setValue(10);
         boutonBois.setSelected(true);
 
-        conteneur1.setVehicule(new Vehicule(1, 80, 20, 40, 50));
+        conteneur1.setVehicule(new Vehicule(1, 80, 25, 40, 50));
         conteneur1.setBuild(false);
         conteneur1.setStart(false);
         for (Distance d : conteneur1.getListeBarre()) {
@@ -418,14 +428,6 @@ public class FenetreInterface extends JFrame implements ActionListener, ChangeLi
 
         repaint();
         conteneur1.repaint();
-    }
-
-    /**
-     *
-     */
-    public void haHa() {
-        this.setState(ICONIFIED);
-        this.setState(NORMAL);
     }
 
 }

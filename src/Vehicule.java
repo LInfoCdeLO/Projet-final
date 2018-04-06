@@ -2,38 +2,40 @@ import java.awt.*;
 import java.util.ArrayList;
 
 /**
- *
+ * Classe qui permet de gerer le moteur physique grace à une liste de poutres en attribut qui representent le chemin entre les deux montagnes
  */
 public class Vehicule {
 
-    private int type;
-    private double poids;
-    private double largeur;
-    private double hauteur;
-    private double vitesse;
-    private double kp;//constante de raideur du ressort lié aux poutres
+    private int type; // type de vehicule 1=velo,2=voiture,3=camion
+    private double poids; //poids du vehicule
+    private double largeur; //largeur entre les deux roues afin de permettre le dessin du vehicule
+    private double hauteur; //hauteur du rectangle vert qui forme le corps du vehicule
+    private double vitesse; //vitesse du vehicule
+    private double kp;//constante de raideur du ressort lie aux poutres
 
-    private double[][] R1;
-    private double[][] R2;
+    private double[][] R1; //Tableau contenant la position de la roue 1 c est a dire celle le plus a droite
+    private double[][] R2; //Tableau contenant la position de la roue 2 c est a dire celle le plus a gauche
 
-    private double[][] V1;
-    private double[][] V2;
+    private double[][] V1; //Tableau contenant la vitesse de la roue 1 
+    private double[][] V2; //Tableau contenant la vitesse de la roue 2
 
-    private double[][] F1;
-    private double[][] F2;
+    private double[][] F1; //Tableau contenant les forces s appliquants sur la roue 1
+    private double[][] F2; //Tableau contenant les forces s appliquants sur la roue 2
 
-    private double[][] diff;
+    private double[][] diff; //Tableau contenant la profondeur a laquelle les roues s'enfonce dans le sol
 
-    private Distance poutre1;
-    private Distance poutre2;
-    private ArrayList<Distance> poutres;
+    private Distance poutre1; //Distance en contact avec la roue 1
+    private Distance poutre2; //Distance en contact avec la roue 2
+    private ArrayList<Distance> poutres; //chemin entre les deux montagnes
 
     /**
-     * @param a
-     * @param b
-     * @param c
-     * @param d
-     * @param e
+     * Constructeur initialisant tous les attributs et les tableaux
+     *
+     * @param a le type du vehicule
+     * @param b le poids du vehicule
+     * @param c la largeur du vehicule
+     * @param d la hauteur du vehicule
+     * @param e la vitesse du vehicule
      */
     public Vehicule(int a, double b, double c, double d, double e) {
         type = a;
@@ -86,6 +88,8 @@ public class Vehicule {
     }
 
     /**
+     * Cette methode calcule la nouvelle position du vehicule ainsi que les poutres en contact avec les roues pour un nouveau temps avance de 10 millisecondes par rapport au precedent
+     *
      * @return
      */
     public boolean moteur() {
@@ -98,20 +102,21 @@ public class Vehicule {
         double vit = (vitesse / 3.6) * echelle; //vitesse en pixels/seconde
         double lp = 8; //epaisseur d'une poutre/2
         double rayon = 10; //rayon des roues du vehicule
-        double gamma = 3000; //coefficient d'amortissement visqueux
+        double gamma = 3000; //coefficient d amortissement visqueux
 
-        double dt = 0.01; //pas de temps d'intégration
+        double dt = 0.01; //pas de temps d intégration
 
-        double x1;
-        double x2;
-        double y1;
-        double y2;
+        double x1; //coordonnee x du point 1 de la poutre
+        double x2; //coordonnee x du point 2 de la poutre
+        double y1; //coordonnee y du point 1 de la poutre
+        double y2; //coordonnee y du point 2 de la poutre
 
-        double R1x;
-        double R1y;
-        double R2x;
-        double R2y;
+        double R1x; //coordonnee x de la roue 1
+        double R1y; //coordonnee y de la roue 1
+        double R2x; //coordonnee x de la roue 2
+        double R2y; //coordonnee y de la roue 2
 
+        //variables pour les calculs de forces et les equations de droite des poutres
         double alpha;
         double a;
         double b;
@@ -260,6 +265,7 @@ public class Vehicule {
         diff[1][0] = 0;
         diff[1][1] = 0;
 
+        //teste si la roue 1 n est pas passee derriere la roue 2, si c est le cas cela ferais exploser le moteur physique
         if (R1[0][0] <= R2[0][0]) {
             basculer = true;
         }
@@ -269,8 +275,10 @@ public class Vehicule {
     }
 
     /**
-     * @param d
-     * @return
+     * Classe qui teste si le vehicule appartient a la Distance rentree en parametre
+     *
+     * @param d une Distance
+     * @return true si le vehicule appartient a la poutre, false sinon
      */
     public boolean appartientPoutre(Distance d) {
         if ((poutre1.getP1().getX() == d.getP1().getX()) && (poutre1.getP1().getY() == d.getP1().getY()) && (poutre1.getP2().getX() == d.getP2().getX()) && (poutre1.getP2().getY() == d.getP2().getY())) {
@@ -283,6 +291,8 @@ public class Vehicule {
     }
 
     /**
+     * Initialise l attribut poutres en rajouttant 2 poutres correspondant aux montagnes
+     *
      * @param a
      */
     public void setPoutres(ArrayList<Distance> a) {
@@ -292,125 +302,136 @@ public class Vehicule {
     }
 
     /**
-     * @param a
+     * Change le type du vehicule
+     *
+     * @param a le type de vehicule
      */
     public void setType(int a) {
         this.type = a;
     }
 
     /**
-     * @return
+     * @return le type du vehicule
      */
     public int getType() {
         return type;
     }
 
     /**
-     * @param a
+     * Change le poids du vehicule
+     *
+     * @param a le poids
      */
     public void setPoids(double a) {
         this.poids = a;
     }
 
     /**
-     * @return
+     * @return le poids du vehicule
      */
     public double getPoids() {
         return poids;
     }
 
     /**
-     * @param a
+     * Change la largeur du vehicule
+     *
+     * @param a la largeur du vehicule
      */
     public void setLargeur(double a) {
         this.largeur = a;
     }
 
     /**
-     * @return
+     * @return la largeur du vehicule
      */
     public double getLargeur() {
         return largeur;
     }
 
     /**
-     * @param a
+     * Change la hauteur du vehicule
+     *
+     * @param a la hauteur du vehicule
      */
     public void setHauteur(double a) {
         this.hauteur = a;
     }
 
     /**
-     * @return
+     * @return la hauteur du vehicule
      */
     public double getHauteur() {
         return hauteur;
     }
 
     /**
-     * @param a
+     * Change la vitesse du vehicule
+     *
+     * @param a la vitesse du vehicule
      */
     public void setVitesse(double a) {
         this.vitesse = a;
     }
 
     /**
-     * @return
+     * @return la vitesse du vehicule
      */
     public double getVitesse() {
         return vitesse;
     }
 
     /**
-     * @return
+     * @return la coordonnee x de la roue 1
      */
     public double getX1() {
         return R1[0][0];
     }
 
     /**
-     * @return
+     * @return la coordonnee x de la roue 2
      */
     public double getX2() {
         return R2[0][0];
     }
 
     /**
-     * @return
+     * @return la coordonnee y de la roue 1
      */
     public double getY1() {
         return 740 - R1[0][1];
     }
 
     /**
-     * @return
+     * @return la coordonnee y de la roue 2
      */
     public double getY2() {
         return 740 - R2[0][1];
     }
 
     /**
-     * @return
+     * @return la coordonnee x du barycentre du vehicule
      */
     public double getX() {
         return (R1[0][0] + R2[0][0]) / 2;
     }
 
     /**
-     * @return
+     * @return la coordonnee y du barycentre du vehicule
      */
     public double getY() {
         return (740 - R1[0][1] + 740 - R2[0][1]) / 2;
     }
 
     /**
-     * @return
+     * @return la liste de Distance representant le pont entre les deux montagnes
      */
     public ArrayList<Distance> getPoutres() {
         ArrayList<Distance> p = new ArrayList<Distance>();
         for (int i = 0; i < poutres.size() - 2; i++) {
             p.add(poutres.get(i));
         }
+
         return p;
     }
 }

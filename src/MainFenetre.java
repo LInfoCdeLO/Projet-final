@@ -1,5 +1,5 @@
 /**
- *
+ * Methode principale qui cree une instance de FenetreInterface
  */
 public class MainFenetre {
 

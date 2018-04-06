@@ -23,6 +23,9 @@ Les sources du projet sont dans le dossier src.
 Les images sont dans le dossier src/Image.
 Vous devez compiler ce programme une première fois avant de pouvoir le lancer. 
 
+## Aperçu du GUI
+
+![Aperçu](http://github.com/linfocdelo/projet-final/apercu.png)
 
 ## Auteurs
 

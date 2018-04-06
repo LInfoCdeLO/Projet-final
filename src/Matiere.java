@@ -1,16 +1,18 @@
 import java.awt.*;
 
 /**
- *
+ * classe permettant de definir la matiere qui compose les poutres ainsi que les caracteristiques associees tel que la densite ou la couleur.
  */
 public class Matiere {
 
-    private double densite;
-    private String nom;
-    private Color c;
+    private double densite; //densite de la poutre
+    private String nom; //nom du materiaux
+    private Color c; //couleur du materiaux
 
     /**
-     * @param nindentification
+     * initialise la densite, le nom et la couleur en fonction du parametre
+     *
+     * @param nindentification 1 pour le bois, 2 pour l acier, 3 pour le beton
      */
     public Matiere(int nindentification) {
         switch (nindentification) {
@@ -33,14 +35,14 @@ public class Matiere {
     }
 
     /**
-     * @return
+     * @return la valeur de la densite
      */
     public double getDensite() {
         return densite;
     }
 
     /**
-     * @return
+     * @return la couleur du materiaux
      */
     public Color getColor() {
         return c;

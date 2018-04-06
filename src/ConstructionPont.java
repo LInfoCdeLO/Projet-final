@@ -4,15 +4,17 @@ import java.util.Collections;
 import java.util.LinkedList;
 
 /**
- *
+ * Classe qui permet de calculer si un chemin existe entre les deux montagnes et trouve le chemin le moins pentu
  */
 public class ConstructionPont {
 
-    private LinkedList<Distance> listePoutre;
-    private ArrayList<Distance> pont;
-    private boolean creationListe;
+    private LinkedList<Distance> listePoutre; //Liste de toutes les poutres tracees par l utilisateur
+    private ArrayList<Distance> pont; //Liste de poutres representant le chemin le moins pentu entre les deux montagnes
+    private boolean creationListe; // variable permettant de savoir si le pont a reussit a etre cree
 
     /**
+     * constructeur qui initialise les attributs et qui creer la liste poutres ordonnee suivant les points les plus a gauche et les angles grace a la methode miseEnForme.
+     *
      * @param listePoutre
      */
     public ConstructionPont(LinkedList<Distance> listePoutre) {
@@ -30,7 +32,7 @@ public class ConstructionPont {
     }
 
     /**
-     *
+     * Methode qui trouve le chemin existant avec l angle le plus bas et qui change la valeur de creationListe suivant le succes ou non
      */
     public void selectionChemin() {
         Point A = new Point(250, 308);
@@ -131,14 +133,14 @@ public class ConstructionPont {
     }
 
     /**
-     * @return
+     * @return true si le pont a reussit a etre cree ou false sinon
      */
     public boolean getCreationListe() {
         return this.creationListe;
     }
 
     /**
-     * @return
+     * @return le pont entre les deux montagnes
      */
     public ArrayList<Distance> getPont() {
         return this.pont;
