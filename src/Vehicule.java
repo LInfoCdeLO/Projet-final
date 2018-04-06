@@ -12,6 +12,7 @@ public class Vehicule {
     private double hauteur; //hauteur du rectangle vert qui forme le corps du vehicule
     private double vitesse; //vitesse du vehicule
     private double kp;//constante de raideur du ressort lie aux poutres
+    private double gamma; //coefficient d amortissement visqueux
 
     private double[][] R1; //Tableau contenant la position de la roue 1 c est a dire celle le plus a droite
     private double[][] R2; //Tableau contenant la position de la roue 2 c est a dire celle le plus a gauche
@@ -41,11 +42,14 @@ public class Vehicule {
         type = a;
 
         if (a == 1) {
-            kp = 10000;
+            kp = 50000;
+            gamma = 1000;
         } else if (a == 2) {
             kp = 100000;
+            gamma = 5000;
         } else {
             kp = 1000000;
+            gamma = 5000;
         }
 
 
@@ -102,7 +106,6 @@ public class Vehicule {
         double vit = (vitesse / 3.6) * echelle; //vitesse en pixels/seconde
         double lp = 8; //epaisseur d'une poutre/2
         double rayon = 10; //rayon des roues du vehicule
-        double gamma = 3000; //coefficient d amortissement visqueux
 
         double dt = 0.01; //pas de temps d intégration
 

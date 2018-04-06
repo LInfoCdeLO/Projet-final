@@ -163,7 +163,7 @@ public class FenetreInterface extends JFrame implements ActionListener, ChangeLi
         selectVehicule.setPaintLabels(true);
 
 
-        selectPoids = new JSlider(JSlider.HORIZONTAL, 1, 10, 2);//Attention pour le multiplieur de poids, le diviser par 2!!
+        selectPoids = new JSlider(JSlider.HORIZONTAL, 1, 10, 2);
         selectPoids.setBounds(20, 260, 430, 50);
         selectPoids.setMajorTickSpacing(1);
         selectPoids.setMinorTickSpacing(1);
@@ -259,6 +259,10 @@ public class FenetreInterface extends JFrame implements ActionListener, ChangeLi
      */
     public void actionPerformed(ActionEvent e) {
 
+        if (conteneur1.getRupture()) {
+            conteneur1.setRupture(false);
+        }
+
         if (e.getSource() == boutonBois) {
             if (!pressStart) {
                 for (Distance d : conteneur1.getListeBarre()) {
@@ -324,6 +328,11 @@ public class FenetreInterface extends JFrame implements ActionListener, ChangeLi
      * @param e
      */
     public void stateChanged(ChangeEvent e) {
+
+        if (conteneur1.getRupture()) {
+            conteneur1.setRupture(false);
+        }
+
         if (!pressStart) {
             JSlider source = (JSlider) e.getSource();
             if (!source.getValueIsAdjusting()) {
@@ -388,6 +397,9 @@ public class FenetreInterface extends JFrame implements ActionListener, ChangeLi
 
             if ((P.getX() != -1) && (P.getY() != -1)) {
                 JOptionPane.showMessageDialog(this, "Dommage, le pont a cede!!");
+                conteneur1.setPRupture(P);
+                conteneur1.setRupture(true);
+                //System.out.println(P);
                 restart(0);
             } else if ((P.getX() == -1) && (P.getY() == -1)) {
                 //System.out.println("le pont resiste");

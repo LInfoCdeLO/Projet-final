@@ -25,6 +25,7 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
     private Point pSave;        //point garde en memoire
     private Point pCliquable;    //point sur lequel je peux cliquer
     private Point pCalibration;  //point qui apparait pour la calibration
+    private Point pRupture;      //point ou le pont se brise
     private Distance dSave;        //garde une sauvegarde d une distance
     private Distance dMove;        //distance dynamique
     private Distance distanceDetectee;//segent detecter par la souris
@@ -37,6 +38,7 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
     private boolean plusUn;
     private boolean DetecterPoutre;
     private boolean start;   //variable qui permet de savoir si la simulation a ete lancee
+    private boolean rupture;  //variable qui permet de conditionner l affichage de la fleche qui indique le point de rupture
     private int n;                //compteur
     private int correcteurX;    //correcteur du a l ecran selon X
     private int correcteurY;    //correcteur du a l ectan selon Y
@@ -149,6 +151,9 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
             g2.setStroke(new BasicStroke(16, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
             g2.drawLine((int) this.distanceDetectee.getP1().getX() + this.correcteurX, (int) distanceDetectee.getP1().getY() + this.correcteurY, (int) distanceDetectee.getP2().getX() + this.correcteurX, (int) distanceDetectee.getP2().getY() + this.correcteurY);
             g2.setStroke(s);
+        }
+        if (rupture) {
+            flecheRupture(g2);
         }
 
     }
@@ -354,6 +359,7 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
                 this.Detecter = false;
             }
         }
+
     }
 
     /**
@@ -385,6 +391,23 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
             this.dSave = new Distance(this.pSave, this.pMoved, this.numeroMateriaux);
         }
     }
+
+    /**
+     * methode appelee dans le repaint qui permet d afficher une fleche sur le point de rupture du pont
+     *
+     * @param g2
+     */
+    public void flecheRupture(Graphics2D g2) {
+        g2.setColor(Color.blue);
+        Stroke s = g2.getStroke();
+        g2.setStroke(new BasicStroke(12, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+        g2.drawLine((int) pRupture.getX() + this.correcteurX, (int) pRupture.getY() - 20 + this.correcteurY, (int) pRupture.getX() - 40 + this.correcteurX, (int) pRupture.getY() - 60 + this.correcteurY);
+        g2.drawLine((int) pRupture.getX() + this.correcteurX, (int) pRupture.getY() - 20 + this.correcteurY, (int) pRupture.getX() + 40 + this.correcteurX, (int) pRupture.getY() - 60 + this.correcteurY);
+        g2.drawLine((int) pRupture.getX() + this.correcteurX, (int) pRupture.getY() - 20 + this.correcteurY, (int) pRupture.getX() + this.correcteurX, (int) pRupture.getY() - 130 + this.correcteurY);
+
+        g2.setStroke(s);
+    }
+
 
     /**
      * Listener de la souris pour le clic
@@ -566,6 +589,31 @@ public class PanelPont extends JPanel implements MouseListener, MouseMotionListe
      */
     public Vehicule getVehicule() {
         return monVehicule;
+    }
+
+    /**
+     * @return le boolean rupture
+     */
+    public boolean getRupture() {
+        return this.rupture;
+    }
+
+    /**
+     * Change l attribut rupture
+     *
+     * @param a un boolean
+     */
+    public void setRupture(boolean a) {
+        this.rupture = a;
+    }
+
+    /**
+     * Change l attribut pRupture
+     *
+     * @param a un vehicule
+     */
+    public void setPRupture(Point a) {
+        this.pRupture = a;
     }
 
     /**

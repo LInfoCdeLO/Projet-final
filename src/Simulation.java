@@ -23,19 +23,18 @@ public class Simulation {
         this.pivotA = 0;
         this.ponctuelleB = 0;
         int taille = this.pont.size();
-        System.out.println("taille Liste: " + taille);
+        //System.out.println("taille Liste: " + taille);
         // calcul des composantes de la lisaison pivot ainsi que de la liaison ponctuelle
         for (int i = 0; i < taille; i++) {
             this.pivotA = this.pivotA + this.pont.get(i).getPoids();
-            this.ponctuelleB = (this.ponctuelleB - (this.pont.get(i).getPoids() * (this.pont.get(i).getBarycentre().getX() - A.getX()) / (A.distance(B))));
+            this.ponctuelleB = (this.ponctuelleB - (this.pont.get(i).getPoids() * (this.pont.get(i).getBarycentre().getX() / 20 - A.getX() / 20) / (A.distance(B) / 20)));
         }
         this.vehicule = vehicule;
     }
 
     /**
-     * @return
+     * @return la composante du torseur de la liaison pivot
      */
-     /* méthode renvoyant la composante du torseur de la liaison pivot */
     public double getPivotA() {
         return this.pivotA;
     }

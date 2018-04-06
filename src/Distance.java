@@ -25,7 +25,7 @@ public class Distance implements Comparable<Distance> {
         this.matierePoutre = new Matiere(numeroMateriaux);
         this.longueur = p1.distance(p2);
         this.barycentre = new Point((int) ((p1.getX() + p2.getX()) / 2), (int) ((p1.getY() + p2.getY()) / 2));
-        this.poids = this.longueur * 5 * 16.0 / 20.0 * this.matierePoutre.getDensite();
+        this.poids = this.longueur / 20.0 * 5 * 16.0 / 20.0 * this.matierePoutre.getDensite();
     }
 
     /**
@@ -82,17 +82,17 @@ public class Distance implements Comparable<Distance> {
     }
 
     /**
-     * Change le materiau et le poids de la poutre
+     * Change le materiaux et le poids de la poutre
      *
      * @param a un entier correspondant a un materiaux
      */
     public void setMatierePoutre(int a) {
         this.matierePoutre = new Matiere(a);
-        this.poids = this.longueur * 5 * 16.0 / 20.0 * this.matierePoutre.getDensite();
+        this.poids = this.longueur / 20.0 * 5 * 16.0 / 20.0 * this.matierePoutre.getDensite();
     }
 
     /**
-     * @return l angle de la poutre par rapport a horizontale
+     * @return l angle de la poutre avec l horizontale
      */
     public double getAngle() {
         return this.angle;
